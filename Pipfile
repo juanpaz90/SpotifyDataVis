@@ -1,0 +1,36 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-bdd = "*"
+pytest-mock = "*"
+pylint = "*"
+coverage = "*"
+autopep8 = "*"
+ipykernel = "*"
+
+[packages]
+python-dotenv = "==0.19.2"
+safety = "*"
+requests = "*"
+jsonschema = "*"
+altair = "*"
+vega-datasets = "*"
+pandas = "*"
+openpyxl = "*"
+xlrd = "*"
+pyyaml = "*"
+matplotlib = "*"
+plotly = "*"
+nbformat = "*"
+nbclient = "*"
+geopandas = "*"
+spotipy = "*"
+
+[requires]
+python_version = "3.12"
+
