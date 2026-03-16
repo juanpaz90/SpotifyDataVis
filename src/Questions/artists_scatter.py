@@ -2,7 +2,7 @@ import pandas as pd
 import altair as alt
 
 
-def prepare_artist_data(df: pd.DataFrame, top_n: int = 15) -> pd.DataFrame:
+def prepare_artist_data(df: pd.DataFrame, top_n: int) -> pd.DataFrame:
     """
     Prepares data for the top artists by grouping track counts per year.
     To avoid overcounting if an exploded dataframe is accidentally passed, 
@@ -25,7 +25,7 @@ def prepare_artist_data(df: pd.DataFrame, top_n: int = 15) -> pd.DataFrame:
     
     return artist_trends
 
-def plot_artist_scatter(df: pd.DataFrame, top_n: int = 15) -> alt.LayerChart:
+def plot_artist_scatter(df: pd.DataFrame, top_n: int) -> alt.LayerChart:
     """
     Creates an interactive Bubble Chart (Scatter Plot) with connecting lines,
     showing the volume of tracks saved per top artist over the years. 
@@ -70,8 +70,8 @@ def plot_artist_scatter(df: pd.DataFrame, top_n: int = 15) -> alt.LayerChart:
     
     # Layer the lines behind the bubbles
     chart = (lines + bubbles).properties(
-        width=750,
-        height=500,
+        width=800,
+        height=400,
         title=f'Top {top_n} Artists Evolution (Tracks Added per Year)'
     ).interactive(
         bind_y=False # Lock vertical scrolling for clarity
