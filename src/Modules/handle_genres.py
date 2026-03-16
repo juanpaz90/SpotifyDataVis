@@ -50,10 +50,11 @@ def explode_genres(df_file: pd.DataFrame) -> pd.DataFrame:
     df_file_exploded['genre_list'] = df_file_exploded['genre_list'].replace('', pd.NA)
     df_file_exploded = df_file_exploded.dropna(subset=['genre_list'])
 
-    # Group specific genres (e.g., all techno variations into 'techno')
-    df_file_exploded['genre_list'] = df_file_exploded['genre_list'].apply(group_techno_genres)
-
     # Deduplicate
-    df_file_exploded = df_file_exploded.drop_duplicates(subset=['track_id', 'genre_list'])
+    # df_file_exploded = df_file_exploded.drop_duplicates(subset=['track_id', 'genre_list'])
     
     return df_file_exploded
+
+
+def get_all_genres(df_file: pd.DataFrame) -> list:
+    return df_file['genre_list'].value_counts().index.to_list()
