@@ -96,7 +96,7 @@ def get_top_parent_categories(df_exploded: pd.DataFrame, n: int = 5) -> list:
 def prepare_q1_data(df_exploded: pd.DataFrame, top_parents: list) -> pd.DataFrame:
     """
     Step 3: Filters data for the top parent categories and aggregates counts
-    by Year-Month and parent level.
+    by Year-Month and parent level. Also extracts the top sub-genres for tooltips.
     """
     df = df_exploded.copy()
     
@@ -110,10 +110,18 @@ def prepare_q1_data(df_exploded: pd.DataFrame, top_parents: list) -> pd.DataFram
     # Filter for only the top parent genres
     df_filtered = df[df['parent_genre'].isin(top_parents)].copy()
     
-    # Group by YEAR-MONTH and parent_genre to get much higher granularity
+    # Group by YEAR-MONTH and parent_genre to get total track count
     genre_trends = (df_filtered.groupby(['added_year_month', 'parent_genre'])
                     .size()
                     .reset_index(name='track_count'))
+                    
+    # Get the top 3 sub-genres for each parent group in that month to show in the tooltip
+    top_subs = (df_filtered.groupby(['added_year_month', 'parent_genre'])['genre_list']
+                .apply(lambda x: ', '.join(x.value_counts().head(3).index))
+                .reset_index(name='top_sub_genres'))
+                
+    # Merge the sub-genres into our trends dataframe
+    genre_trends = pd.merge(genre_trends, top_subs, on=['added_year_month', 'parent_genre'])
     
     return genre_trends
 
@@ -157,6 +165,7 @@ def plot_taste_evolution(df_exploded: pd.DataFrame, top_parents_n: int) -> alt.C
             # Format tooltip to show Month and Year nicely (e.g., "March 2022")
             alt.Tooltip('added_year_month:T', title='Date', format='%B %Y'),
             alt.Tooltip('parent_genre:N', title='Category'),
+            alt.Tooltip('top_sub_genres:N', title='Top Sub-genres'),
             alt.Tooltip('track_count:Q', title='Tracks Added')
         ]
     ).add_params(
