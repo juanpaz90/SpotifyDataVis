@@ -86,35 +86,3 @@ from Graphics.sankey_diagram import plot_genre_sankey
 sankey_chart = plot_genre_sankey(df_exploded_track_list, top_parents_n=7, top_subs_n=3)
 sankey_chart.show()
 ```
-
-# Evolución Temporal del Gusto Musical
-A continuación, desplegamos las visualizaciones interactivas creadas con Altair para entender los patrones musicales históricos.
-```{python}
-from Graphics.taste_evolution import plot_taste_evolution
-chart_q1 = plot_taste_evolution(df_exploded_track_list, top_parents_n=10)
-chart_q1.display()
-```
-
-## Dispersión y Continuidad de Artistas Top
-Permite ver en qué años específicos se añadieron más tracks de un artista
-```{python}
-from Graphics.artists_scatter import plot_artist_scatter
-artist_chart = plot_artist_scatter(df_clean_track_list, top_n=10)
-artist_chart.display()
-```
-
-## Visualización Streamgraph 
-Muestra el flujo orgánico y temporal de los artistas más escuchados
-```{python}
-from Graphics.artists_streamgraph import plot_artist_streamgraph
-artist_stream = plot_artist_streamgraph(df_clean_track_list, top_n=10)
-artist_stream.display()
-```
-
-## Distribución Radial por Artista y Género
-Muestra los artistas que mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.
-```{python}
-from Graphics.genre_category import plot_artist_radial
-radial_chart = plot_artist_radial(df_exploded_track_list, top_n=35)
-radial_chart.display()
-```

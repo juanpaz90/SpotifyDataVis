@@ -117,5 +117,54 @@
     "title": "Análisis de Datos de Spotify: Evolución Musical",
     "section": "Macro-categorías hacia subgéneros",
     "text": "Macro-categorías hacia subgéneros\n\nfrom Graphics.sankey_diagram import plot_genre_sankey\nsankey_chart = plot_genre_sankey(df_exploded_track_list, top_parents_n=7, top_subs_n=3)\nsankey_chart.show()"
+  },
+  {
+    "objectID": "music_evolution.html",
+    "href": "music_evolution.html",
+    "title": "Evolución musical",
+    "section": "",
+    "text": "A continuación se muestra el numero de tracks categorizados por genero que se han añadido durante los años.\n\nfrom Graphics.taste_evolution import plot_taste_evolution\nchart_q1 = plot_taste_evolution(df_exploded_track_list, top_parents_n=10)\nchart_q1.display()\n\n/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src/Graphics/taste_evolution.py:24: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.\n  df['added_year_month'] = df['added_at'].dt.to_period('M').dt.to_timestamp()"
+  },
+  {
+    "objectID": "music_evolution.html#dispersión-y-continuidad-de-artistas-top",
+    "href": "music_evolution.html#dispersión-y-continuidad-de-artistas-top",
+    "title": "Evolución musical",
+    "section": "Dispersión y Continuidad de Artistas Top",
+    "text": "Dispersión y Continuidad de Artistas Top\nPermite ver en qué años específicos se añadieron más tracks de un artista.\n\nfrom Graphics.artists_scatter import plot_artist_scatter\nartist_chart = plot_artist_scatter(df_clean_track_list, top_n=10)\nartist_chart.display()"
+  },
+  {
+    "objectID": "music_evolution.html#visualización-streamgraph",
+    "href": "music_evolution.html#visualización-streamgraph",
+    "title": "Evolución Temporal del Gusto Musical",
+    "section": "Visualización Streamgraph",
+    "text": "Visualización Streamgraph\nMuestra el flujo orgánico y temporal de los artistas más escuchados\n\nfrom Graphics.artists_streamgraph import plot_artist_streamgraph\nartist_stream = plot_artist_streamgraph(df_clean_track_list, top_n=10)\nartist_stream.display()"
+  },
+  {
+    "objectID": "music_evolution.html#distribución-radial-por-artista-y-género",
+    "href": "music_evolution.html#distribución-radial-por-artista-y-género",
+    "title": "Evolución Temporal del Gusto Musical",
+    "section": "Distribución Radial por Artista y Género",
+    "text": "Distribución Radial por Artista y Género\nMuestra los artistas que mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.\n\nfrom Graphics.genre_category import plot_artist_radial\nradial_chart = plot_artist_radial(df_exploded_track_list, top_n=35)\nradial_chart.display()"
+  },
+  {
+    "objectID": "music_evolution.html#flujo-de-los-artistas-mas-escuchados",
+    "href": "music_evolution.html#flujo-de-los-artistas-mas-escuchados",
+    "title": "Evolución musical",
+    "section": "Flujo de los artistas mas escuchados",
+    "text": "Flujo de los artistas mas escuchados\nMuestra el flujo orgánico y temporal de los artistas más escuchados.\n\nfrom Graphics.artists_streamgraph import plot_artist_streamgraph\nartist_stream = plot_artist_streamgraph(df_clean_track_list, top_n=10)\nartist_stream.display()"
+  },
+  {
+    "objectID": "music_evolution.html#distribución-por-artista-y-género",
+    "href": "music_evolution.html#distribución-por-artista-y-género",
+    "title": "Evolución musical",
+    "section": "Distribución por Artista y Género",
+    "text": "Distribución por Artista y Género\nMuestra los artistas con mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.\n\nfrom Graphics.genre_category import plot_artist_radial\nradial_chart = plot_artist_radial(df_exploded_track_list, top_n=35)\nradial_chart.display()"
+  },
+  {
+    "objectID": "music_evolution.html#numero-de-canciones-añadidas",
+    "href": "music_evolution.html#numero-de-canciones-añadidas",
+    "title": "Evolución musical",
+    "section": "",
+    "text": "A continuación se muestra el numero de tracks categorizados por genero que se han añadido durante los años.\n\nfrom Graphics.taste_evolution import plot_taste_evolution\nchart_q1 = plot_taste_evolution(df_exploded_track_list, top_parents_n=10)\nchart_q1.display()\n\n/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src/Graphics/taste_evolution.py:24: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.\n  df['added_year_month'] = df['added_at'].dt.to_period('M').dt.to_timestamp()"
   }
 ]
