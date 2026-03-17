@@ -18,13 +18,19 @@ def prepare_hierarchy_data(df_exploded: pd.DataFrame) -> pd.DataFrame:
     
     return hierarchy_data
 
-def plot_genre_hierarchy(df_exploded: pd.DataFrame) -> alt.VConcatChart:
+def plot_genre_hierarchy(df_exploded: pd.DataFrame, top_n_parents: int = 12) -> alt.VConcatChart:
     """
     Creates an interactive dashboard. Clicking a parent genre on the left 
     filters the sub-genres on the right.
     """
     # 1. Prepare the data
     source_data = prepare_hierarchy_data(df_exploded)
+
+    top_parents = (source_data.groupby('parent_genre')['track_count']
+                   .sum()
+                   .nlargest(top_n_parents)
+                   .index)
+    source_data = source_data[source_data['parent_genre'].isin(top_parents)]
     
     # 2. Extract colors
     parent_genres = source_data['parent_genre'].unique()
@@ -56,7 +62,6 @@ def plot_genre_hierarchy(df_exploded: pd.DataFrame) -> alt.VConcatChart:
     )
 
     # 5. Create the Sub-genres Chart (Right side)
-    # Uses a window transform to ensure we only show the top 15 sub-genres for the selected parent
     sub_chart = alt.Chart(source_data).mark_bar(cornerRadiusEnd=4).encode(
         y=alt.Y('genre_list:N', sort='-x', title='', axis=alt.Axis(labelLimit=250)),
         x=alt.X('track_count:Q', title='Tracks Saved'),
@@ -68,7 +73,7 @@ def plot_genre_hierarchy(df_exploded: pd.DataFrame) -> alt.VConcatChart:
         rank='rank(track_count)',
         sort=[alt.SortField('track_count', order='descending')]
     ).transform_filter(
-        alt.datum.rank <= 15 # Keep it clean: only show the top 15 sub-genres for the selected parent
+        alt.datum.rank <= 12 # Keep it clean: only show the top 10 sub-genres for the selected parent
     ).properties(
         width=350,
         height=400,

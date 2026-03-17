@@ -35,11 +35,11 @@ def plot_artist_scatter(df: pd.DataFrame, top_n: int) -> alt.LayerChart:
     # Build Altair Scatter / Bubble Chart
     bubbles = base.mark_circle().encode(
         # Bubble size represents the number of tracks saved that year
-        size=alt.Size('track_count:Q', title='Tracks Added', scale=alt.Scale(range=[50, 1500]), legend=alt.Legend(clipHeight=30)),
+        size=alt.Size('track_count:Q', title='Tracks Added', scale=alt.Scale(range=[50, 1500]), legend=alt.Legend(clipHeight=40)),
         opacity=alt.condition(highlight, alt.value(1.0), alt.value(0.2)),
         tooltip=[
             alt.Tooltip('artist_name:N', title='Artist'),
-            alt.Tooltip('added_year:O', title='Year'), # Keep nominal in tooltip so commas don't appear
+            alt.Tooltip('added_year:O', title='Year'),
             alt.Tooltip('track_count:Q', title='Tracks Added')
         ]
     ).add_params(
@@ -67,7 +67,7 @@ def plot_artist_scatter(df: pd.DataFrame, top_n: int) -> alt.LayerChart:
         titleColor='#dddddd'
     ).configure_title(
         color='#dddddd',
-        fontSize=16
+        fontSize=20
     ).configure_view(
         stroke='transparent'
     )
