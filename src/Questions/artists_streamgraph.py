@@ -1,35 +1,7 @@
 import pandas as pd
 import altair as alt
+from Modules.prepare_artist_data import prepare_artist_data
 
-
-def prepare_artist_data(df: pd.DataFrame, top_n: int) -> pd.DataFrame:
-    """
-    Prepares data for the top artists by grouping track counts per year.
-    Fills in missing years with 0 so the Streamgraph curves fall cleanly to the baseline.
-    """
-    # Deduplicate in case df_exploded is used instead of df_clean
-    if 'track_id' in df.columns:
-        df_unique = df.drop_duplicates(subset=['track_id']).copy()
-    else:
-        df_unique = df.copy()
-        
-    # Get the top N artists overall
-    top_artists = df_unique['artist_name'].value_counts().nlargest(top_n).index.tolist()
-    df_filtered = df_unique[df_unique['artist_name'].isin(top_artists)].copy()
-    
-    # Group by year and artist to count tracks
-    artist_trends = (df_filtered.groupby(['added_year', 'artist_name'])
-                     .size()
-                     .reset_index(name='track_count'))
-                     
-    # Create a complete grid of all years and top artists so streams drop to zero for empty years
-    if not artist_trends.empty:
-        years = range(artist_trends['added_year'].min(), artist_trends['added_year'].max() + 1)
-        idx = pd.MultiIndex.from_product([years, top_artists], names=['added_year', 'artist_name'])
-        grid = pd.DataFrame(index=idx).reset_index()
-        artist_trends = grid.merge(artist_trends, on=['added_year', 'artist_name'], how='left').fillna({'track_count': 0})
-    
-    return artist_trends
 
 def plot_artist_streamgraph(df: pd.DataFrame, top_n: int) -> alt.Chart:
     """

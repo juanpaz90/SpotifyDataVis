@@ -96,8 +96,8 @@ def plot_artist_radial(df_exploded: pd.DataFrame, top_n: int) -> alt.Chart:
     ).add_params(
         highlight
     ).properties(
-        width=650,
-        height=650,
+        width=555,
+        height=555,
         title=f'Top {top_n} Artists by Absolute Track Volume'
     ).configure(
         background='#2b2b2b'
