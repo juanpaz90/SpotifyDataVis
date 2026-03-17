@@ -1,20 +1,18 @@
 project:
   type: website
-  output-dir: /Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/docs
+  output-dir: _site
 
 website:
-  title: "Historial de Spotify"
+  title: "Spotify Data Analytics"
   navbar:
+    background: "#1DB954"
     left:
       - href: index.qmd
-        text: Inicio
+        text: "Inicio"
+      - href: spotify_analisis.qmd
+        text: "Q1: Evolución Musical"
 
 format:
   html:
-    theme: cosmo
+    theme: darkly
     toc: true
-
-code-fold: true
-
-execute:
-  freeze: auto
