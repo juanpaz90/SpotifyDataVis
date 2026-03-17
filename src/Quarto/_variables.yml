@@ -1,0 +1,17 @@
+version: 1.2
+
+email:
+  info: info@example.com
+  support: support@example.com
+
+engine:
+  jupyter: "[Jupyter](https://jupyter.org)"
+  knitr: "[Knitr](<https://yihui.name/knitr>)"
+
+# Rutas de directorios de datos
+data_path_25: "/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2025/"
+data_path_26: "/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2026/"
+
+# Nombres de los archivos CSV de la API
+saved_tracks_25: "saved_tracks_20251018.csv"
+track_details_25: "track_details_20251018.csv"

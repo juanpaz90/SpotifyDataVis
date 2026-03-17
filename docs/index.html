@@ -139,8 +139,8 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./spotify_analisis.qmd"> 
-<span class="menu-text">Q1: Evolución Musical</span></a>
+    <a class="nav-link" href="./music_evolution.html"> 
+<span class="menu-text">Evolución Musical</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -158,19 +158,18 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#configuracion-inicial" id="toc-configuracion-inicial" class="nav-link active" data-scroll-target="#configuracion-inicial">Configuracion Inicial</a></li>
-  <li><a href="#lectura-y-procesamiento-de-los-datos" id="toc-lectura-y-procesamiento-de-los-datos" class="nav-link" data-scroll-target="#lectura-y-procesamiento-de-los-datos">Lectura y Procesamiento de los datos</a>
+  <li><a href="#lectura-y-procesamiento" id="toc-lectura-y-procesamiento" class="nav-link active" data-scroll-target="#lectura-y-procesamiento">Lectura y Procesamiento</a>
   <ul class="collapse">
   <li><a href="#lista-completa-de-traks-alamcenados" id="toc-lista-completa-de-traks-alamcenados" class="nav-link" data-scroll-target="#lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</a></li>
   <li><a href="#metadata-de-los-tracks" id="toc-metadata-de-los-tracks" class="nav-link" data-scroll-target="#metadata-de-los-tracks">Metadata de los tracks</a></li>
-  <li><a href="#haciendo-un-merge-de-los-datasets" id="toc-haciendo-un-merge-de-los-datasets" class="nav-link" data-scroll-target="#haciendo-un-merge-de-los-datasets">Haciendo un merge de los datasets</a></li>
-  <li><a href="#transformar-fechas-y-aplicar-limpieza-a-las-duraciones" id="toc-transformar-fechas-y-aplicar-limpieza-a-las-duraciones" class="nav-link" data-scroll-target="#transformar-fechas-y-aplicar-limpieza-a-las-duraciones">Transformar fechas y aplicar limpieza a las duraciones</a></li>
-  <li><a href="#expandir-explode-las-listas-de-géneros-para-que-cada-track-tenga-una-fila-por-género-asociado" id="toc-expandir-explode-las-listas-de-géneros-para-que-cada-track-tenga-una-fila-por-género-asociado" class="nav-link" data-scroll-target="#expandir-explode-las-listas-de-géneros-para-que-cada-track-tenga-una-fila-por-género-asociado">Expandir (explode) las listas de géneros para que cada track tenga una fila por género asociado</a></li>
+  <li><a href="#merge-de-los-datasets" id="toc-merge-de-los-datasets" class="nav-link" data-scroll-target="#merge-de-los-datasets">Merge de los datasets</a></li>
+  <li><a href="#transformar-fechas" id="toc-transformar-fechas" class="nav-link" data-scroll-target="#transformar-fechas">Transformar fechas</a></li>
+  <li><a href="#expandir-explode-las-listas-de-géneros" id="toc-expandir-explode-las-listas-de-géneros" class="nav-link" data-scroll-target="#expandir-explode-las-listas-de-géneros">Expandir (explode) las listas de géneros</a></li>
   </ul></li>
   <li><a href="#generos-musicales-en-mi-biblioteca" id="toc-generos-musicales-en-mi-biblioteca" class="nav-link" data-scroll-target="#generos-musicales-en-mi-biblioteca">Generos Musicales en mi biblioteca</a>
   <ul class="collapse">
-  <li><a href="#gráfico-de-barras-interactivas-que-desglosa-las-familias-de-géneros-principales" id="toc-gráfico-de-barras-interactivas-que-desglosa-las-familias-de-géneros-principales" class="nav-link" data-scroll-target="#gráfico-de-barras-interactivas-que-desglosa-las-familias-de-géneros-principales">Gráfico de barras interactivas que desglosa las familias de géneros principales</a></li>
-  <li><a href="#cómo-fluyen-las-macro-categorías-hacia-los-subgéneros-más-específicos" id="toc-cómo-fluyen-las-macro-categorías-hacia-los-subgéneros-más-específicos" class="nav-link" data-scroll-target="#cómo-fluyen-las-macro-categorías-hacia-los-subgéneros-más-específicos">Cómo fluyen las macro-categorías hacia los subgéneros más específicos</a></li>
+  <li><a href="#gráfico-de-las-familias-de-géneros-principales" id="toc-gráfico-de-las-familias-de-géneros-principales" class="nav-link" data-scroll-target="#gráfico-de-las-familias-de-géneros-principales">Gráfico de las familias de géneros principales</a></li>
+  <li><a href="#macro-categorías-hacia-subgéneros" id="toc-macro-categorías-hacia-subgéneros" class="nav-link" data-scroll-target="#macro-categorías-hacia-subgéneros">Macro-categorías hacia subgéneros</a></li>
   </ul></li>
   <li><a href="#evolución-temporal-del-gusto-musical" id="toc-evolución-temporal-del-gusto-musical" class="nav-link" data-scroll-target="#evolución-temporal-del-gusto-musical">Evolución Temporal del Gusto Musical</a>
   <ul class="collapse">
@@ -210,41 +209,18 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </header>
 
 
-<section id="configuracion-inicial" class="level1">
-<h1>Configuracion Inicial</h1>
-<p>En esta sección configuramos las librerías necesarias, incluyendo los módulos personalizados y las rutas donde se alojan nuestros datos extraídos de Spotify.</p>
-<div id="3ca2a342" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>project_root <span class="op">=</span> os.path.abspath(<span class="st">'/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sys.path.append(project_root)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Modules.read_data <span class="im">import</span> read_data</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Modules.handle_time <span class="im">import</span> transform_time_and_duration</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Modules.handle_genres <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.taste_evolution <span class="im">import</span> plot_taste_evolution</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>data_path_25 <span class="op">=</span> <span class="st">'/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2025/'</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>data_path_26 <span class="op">=</span> <span class="st">'/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2026/'</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>saved_tracks_25 <span class="op">=</span> <span class="st">'saved_tracks_20251018.csv'</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>track_details_25 <span class="op">=</span> <span class="st">'track_details_20251018.csv'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="lectura-y-procesamiento-de-los-datos" class="level1">
-<h1>Lectura y Procesamiento de los datos</h1>
+<section id="lectura-y-procesamiento" class="level1">
+<h1>Lectura y Procesamiento</h1>
 <p>Aplicamos transformaciones iniciales, hacemos el cruce (merge) entre los tracks guardados y sus metadatos, y normalizamos los géneros musicales.</p>
-<div id="cdf9db7e" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25 <span class="op">=</span> read_data(data_path_25, saved_tracks_25)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_track_details_25 <span class="op">=</span> read_data(data_path_25, track_details_25)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="8a9cd112" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25 <span class="op">=</span> read_data(data_path_25, saved_tracks_25)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_track_details_25 <span class="op">=</span> read_data(data_path_25, track_details_25)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="lista-completa-de-traks-alamcenados" class="level2">
 <h2 class="anchored" data-anchor-id="lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</h2>
-<div id="aa621a25" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="a8688873" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="94">
 <div>
 
 
@@ -345,9 +321,9 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </section>
 <section id="metadata-de-los-tracks" class="level2">
 <h2 class="anchored" data-anchor-id="metadata-de-los-tracks">Metadata de los tracks</h2>
-<div id="7fb24ce5" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_track_details_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="c67ef413" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_track_details_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="95">
 <div>
 
 
@@ -416,18 +392,18 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </div>
 </div>
 </section>
-<section id="haciendo-un-merge-de-los-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="haciendo-un-merge-de-los-datasets">Haciendo un merge de los datasets</h2>
+<section id="merge-de-los-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="merge-de-los-datasets">Merge de los datasets</h2>
 <ul>
 <li>Seleccionar solo las columnas clave (ID y Géneros) de los detalles para hacer el cruce</li>
 <li>Hacer un Left Join para añadir los géneros a la tabla principal de canciones guardadas</li>
 </ul>
-<div id="98d509f7" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>track_details_subset <span class="op">=</span> df_track_details_25[[<span class="st">'track_id'</span>, <span class="st">'artist_genres'</span>]]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>merged_list_details <span class="op">=</span> pd.merge(df_saved_tracks_25, track_details_subset, on<span class="op">=</span><span class="st">'track_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>merged_list_details.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="aa4333e8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>track_details_subset <span class="op">=</span> df_track_details_25[[<span class="st">'track_id'</span>, <span class="st">'artist_genres'</span>]]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>merged_list_details <span class="op">=</span> pd.merge(df_saved_tracks_25, track_details_subset, on<span class="op">=</span><span class="st">'track_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>merged_list_details.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="96">
 <div>
 
 
@@ -532,12 +508,12 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </div>
 </div>
 </section>
-<section id="transformar-fechas-y-aplicar-limpieza-a-las-duraciones" class="level2">
-<h2 class="anchored" data-anchor-id="transformar-fechas-y-aplicar-limpieza-a-las-duraciones">Transformar fechas y aplicar limpieza a las duraciones</h2>
-<div id="f303359f" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_clean_track_list <span class="op">=</span> transform_time_and_duration(merged_list_details)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_clean_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<section id="transformar-fechas" class="level2">
+<h2 class="anchored" data-anchor-id="transformar-fechas">Transformar fechas</h2>
+<div id="055a0c3f" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_clean_track_list <span class="op">=</span> transform_time_and_duration(merged_list_details)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_clean_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="97">
 <div>
 
 
@@ -654,12 +630,12 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </div>
 </div>
 </section>
-<section id="expandir-explode-las-listas-de-géneros-para-que-cada-track-tenga-una-fila-por-género-asociado" class="level2">
-<h2 class="anchored" data-anchor-id="expandir-explode-las-listas-de-géneros-para-que-cada-track-tenga-una-fila-por-género-asociado">Expandir (explode) las listas de géneros para que cada track tenga una fila por género asociado</h2>
-<div id="3d3e1a0a" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list <span class="op">=</span> explode_genres(df_clean_track_list)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<section id="expandir-explode-las-listas-de-géneros" class="level2">
+<h2 class="anchored" data-anchor-id="expandir-explode-las-listas-de-géneros">Expandir (explode) las listas de géneros</h2>
+<div id="c7e9eea2" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list <span class="op">=</span> explode_genres(df_clean_track_list)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="98">
 <div>
 
 
@@ -786,32 +762,32 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <section id="generos-musicales-en-mi-biblioteca" class="level1">
 <h1>Generos Musicales en mi biblioteca</h1>
 <p>Se empieza con un analisis de los principales generos que componenen mi biblioteca musical, esto nos da una idea general de mis preferencias musicales.</p>
-<section id="gráfico-de-barras-interactivas-que-desglosa-las-familias-de-géneros-principales" class="level2">
-<h2 class="anchored" data-anchor-id="gráfico-de-barras-interactivas-que-desglosa-las-familias-de-géneros-principales">Gráfico de barras interactivas que desglosa las familias de géneros principales</h2>
-<div id="b9dbef66" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_hierarchy <span class="im">import</span> plot_genre_hierarchy</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>breakdown_chart <span class="op">=</span> plot_genre_hierarchy(df_exploded_track_list)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>breakdown_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="gráfico-de-las-familias-de-géneros-principales" class="level2">
+<h2 class="anchored" data-anchor-id="gráfico-de-las-familias-de-géneros-principales">Gráfico de las familias de géneros principales</h2>
+<div id="8f2f40ef" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_hierarchy <span class="im">import</span> plot_genre_hierarchy</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>breakdown_chart <span class="op">=</span> plot_genre_hierarchy(df_exploded_track_list)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>breakdown_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-59cb787e3af14439840d1bfcbceeaafb.vega-embed {
+  #altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-59cb787e3af14439840d1bfcbceeaafb.vega-embed details,
-  #altair-viz-59cb787e3af14439840d1bfcbceeaafb.vega-embed details summary {
+  #altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb.vega-embed details,
+  #altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-59cb787e3af14439840d1bfcbceeaafb"></div>
+<div id="altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-59cb787e3af14439840d1bfcbceeaafb") {
-      outputDiv = document.getElementById("altair-viz-59cb787e3af14439840d1bfcbceeaafb");
+    if (outputDiv.id !== "altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb") {
+      outputDiv = document.getElementById("altair-viz-1b2c44efc6bf44bcadf984e4a050b8eb");
     }
 
     const paths = {
@@ -864,17 +840,17 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </div>
 </div>
 </section>
-<section id="cómo-fluyen-las-macro-categorías-hacia-los-subgéneros-más-específicos" class="level2">
-<h2 class="anchored" data-anchor-id="cómo-fluyen-las-macro-categorías-hacia-los-subgéneros-más-específicos">Cómo fluyen las macro-categorías hacia los subgéneros más específicos</h2>
-<div id="18eb04af" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.sankey_diagram <span class="im">import</span> plot_genre_sankey</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sankey_chart <span class="op">=</span> plot_genre_sankey(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">7</span>, top_subs_n<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sankey_chart.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="macro-categorías-hacia-subgéneros" class="level2">
+<h2 class="anchored" data-anchor-id="macro-categorías-hacia-subgéneros">Macro-categorías hacia subgéneros</h2>
+<div id="581246ed" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.sankey_diagram <span class="im">import</span> plot_genre_sankey</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sankey_chart <span class="op">=</span> plot_genre_sankey(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">7</span>, top_subs_n<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sankey_chart.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>                <div id="6a51608a-c44a-4f7b-aab0-720b6a2b7083" class="plotly-graph-div" style="height:800px; width:900px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("6a51608a-c44a-4f7b-aab0-720b6a2b7083")) {                    Plotly.newPlot(                        "6a51608a-c44a-4f7b-aab0-720b6a2b7083",                        [{"link":{"color":["rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)"],"source":{"dtype":"i1","bdata":"AAAAAAEBAQECAgICAwMDAwQEBAQFBQUFBgYGBg=="},"target":{"dtype":"i1","bdata":"BwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIg=="},"value":{"dtype":"i2","bdata":"\u002fxBhAo8CGwNKAAgAGAAeABQBOQBtADUAIgAPABMADQCUABAAIQAQAD4ACgAKABEAYwEbABsAGwA="}},"node":{"color":["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#4e79a7","#4e79a7","#4e79a7","#4e79a7","#f28e2c","#f28e2c","#f28e2c","#f28e2c","#e15759","#e15759","#e15759","#e15759","#76b7b2","#76b7b2","#76b7b2","#76b7b2","#59a14f","#59a14f","#59a14f","#59a14f","#edc949","#edc949","#edc949","#edc949","#af7aa1","#af7aa1","#af7aa1","#af7aa1"],"label":["Electronic & Dance Music","Hip Hop, Rap & Trap","Indie, Alternative & Experimental","Other","Pop & Vocal","R&B, Soul, Funk & Disco","Rock, Punk & Heavy Metal","Other Electronic & Dance Music","melodic house","melodic techno","techno","Other Hip Hop, Rap & Trap","drift phonk","phonk","trip hop","Other Indie, Alternative & Experimental","indie","indie dance","new rave","Other Other","chillstep","electronic","industrial","Other Pop & Vocal","art pop","french indie pop","synthpop","Other R&B, Soul, Funk & Disco","disco","funk","indie soul","Other Rock, Punk & Heavy Metal","alternative rock","indie rock","punk"],"line":{"color":"#111111","width":0.5},"pad":30,"thickness":20},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"title":{"font":{"size":18},"text":"Genre Hierarchy Breakdown (Top 7 Families)"},"font":{"size":12,"color":"#dddddd"},"margin":{"l":20,"r":20,"t":50,"b":20},"paper_bgcolor":"#2b2b2b","plot_bgcolor":"#2b2b2b","width":900,"height":800},                        {"responsive": true}                    ).then(function(){
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>                <div id="bf238402-04c0-453b-9cc5-0241fc6ff587" class="plotly-graph-div" style="height:800px; width:900px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("bf238402-04c0-453b-9cc5-0241fc6ff587")) {                    Plotly.newPlot(                        "bf238402-04c0-453b-9cc5-0241fc6ff587",                        [{"link":{"color":["rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)"],"source":{"dtype":"i1","bdata":"AAAAAAEBAQECAgICAwMDAwQEBAQFBQUFBgYGBg=="},"target":{"dtype":"i1","bdata":"BwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIg=="},"value":{"dtype":"i2","bdata":"\u002fxBhAo8CGwNKAAgAGAAeABQBOQBtADUAIgAPABMADQCUABAAIQAQAD4ACgAKABEAYwEbABsAGwA="}},"node":{"color":["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#4e79a7","#4e79a7","#4e79a7","#4e79a7","#f28e2c","#f28e2c","#f28e2c","#f28e2c","#e15759","#e15759","#e15759","#e15759","#76b7b2","#76b7b2","#76b7b2","#76b7b2","#59a14f","#59a14f","#59a14f","#59a14f","#edc949","#edc949","#edc949","#edc949","#af7aa1","#af7aa1","#af7aa1","#af7aa1"],"label":["Electronic & Dance Music","Hip Hop, Rap & Trap","Indie, Alternative & Experimental","Other","Pop & Vocal","R&B, Soul, Funk & Disco","Rock, Punk & Heavy Metal","Other Electronic & Dance Music","melodic house","melodic techno","techno","Other Hip Hop, Rap & Trap","drift phonk","phonk","trip hop","Other Indie, Alternative & Experimental","indie","indie dance","new rave","Other Other","chillstep","electronic","industrial","Other Pop & Vocal","art pop","french indie pop","synthpop","Other R&B, Soul, Funk & Disco","disco","funk","indie soul","Other Rock, Punk & Heavy Metal","alternative rock","indie rock","punk"],"line":{"color":"#111111","width":0.5},"pad":30,"thickness":20},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"title":{"font":{"size":18},"text":"Genre Hierarchy Breakdown (Top 7 Families)"},"font":{"size":12,"color":"#dddddd"},"margin":{"l":20,"r":20,"t":50,"b":20},"paper_bgcolor":"#2b2b2b","plot_bgcolor":"#2b2b2b","width":900,"height":800},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('6a51608a-c44a-4f7b-aab0-720b6a2b7083');
+var gd = document.getElementById('bf238402-04c0-453b-9cc5-0241fc6ff587');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -904,10 +880,10 @@ if (outputEl) {{
 <section id="evolución-temporal-del-gusto-musical" class="level1">
 <h1>Evolución Temporal del Gusto Musical</h1>
 <p>A continuación, desplegamos las visualizaciones interactivas creadas con Altair para entender los patrones musicales históricos.</p>
-<div id="0a3d4178" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.taste_evolution <span class="im">import</span> plot_taste_evolution</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>chart_q1 <span class="op">=</span> plot_taste_evolution(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>chart_q1.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="57fada0c" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.taste_evolution <span class="im">import</span> plot_taste_evolution</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>chart_q1 <span class="op">=</span> plot_taste_evolution(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>chart_q1.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src/Graphics/taste_evolution.py:24: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
   df['added_year_month'] = df['added_at'].dt.to_period('M').dt.to_timestamp()</code></pre>
@@ -915,23 +891,23 @@ if (outputEl) {{
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-df8a62f092be43ae9e28d8a400e8df23.vega-embed {
+  #altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-df8a62f092be43ae9e28d8a400e8df23.vega-embed details,
-  #altair-viz-df8a62f092be43ae9e28d8a400e8df23.vega-embed details summary {
+  #altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094.vega-embed details,
+  #altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-df8a62f092be43ae9e28d8a400e8df23"></div>
+<div id="altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-df8a62f092be43ae9e28d8a400e8df23") {
-      outputDiv = document.getElementById("altair-viz-df8a62f092be43ae9e28d8a400e8df23");
+    if (outputDiv.id !== "altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094") {
+      outputDiv = document.getElementById("altair-viz-3fe8544ef9ff4a8a9f0dd7f6c5546094");
     }
 
     const paths = {
@@ -986,30 +962,30 @@ if (outputEl) {{
 <section id="dispersión-y-continuidad-de-artistas-top" class="level2">
 <h2 class="anchored" data-anchor-id="dispersión-y-continuidad-de-artistas-top">Dispersión y Continuidad de Artistas Top</h2>
 <p>Permite ver en qué años específicos se añadieron más tracks de un artista</p>
-<div id="d8f5bfdb" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_scatter <span class="im">import</span> plot_artist_scatter</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>artist_chart <span class="op">=</span> plot_artist_scatter(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>artist_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6c71c2a6" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_scatter <span class="im">import</span> plot_artist_scatter</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>artist_chart <span class="op">=</span> plot_artist_scatter(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>artist_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-d0ce2064a1334aa6a36ad8cfda44a502.vega-embed {
+  #altair-viz-6398de8d0183490189dcffb7e9ad480c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d0ce2064a1334aa6a36ad8cfda44a502.vega-embed details,
-  #altair-viz-d0ce2064a1334aa6a36ad8cfda44a502.vega-embed details summary {
+  #altair-viz-6398de8d0183490189dcffb7e9ad480c.vega-embed details,
+  #altair-viz-6398de8d0183490189dcffb7e9ad480c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d0ce2064a1334aa6a36ad8cfda44a502"></div>
+<div id="altair-viz-6398de8d0183490189dcffb7e9ad480c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d0ce2064a1334aa6a36ad8cfda44a502") {
-      outputDiv = document.getElementById("altair-viz-d0ce2064a1334aa6a36ad8cfda44a502");
+    if (outputDiv.id !== "altair-viz-6398de8d0183490189dcffb7e9ad480c") {
+      outputDiv = document.getElementById("altair-viz-6398de8d0183490189dcffb7e9ad480c");
     }
 
     const paths = {
@@ -1065,30 +1041,30 @@ if (outputEl) {{
 <section id="visualización-streamgraph" class="level2">
 <h2 class="anchored" data-anchor-id="visualización-streamgraph">Visualización Streamgraph</h2>
 <p>Muestra el flujo orgánico y temporal de los artistas más escuchados</p>
-<div id="28ba4573" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_streamgraph <span class="im">import</span> plot_artist_streamgraph</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>artist_stream <span class="op">=</span> plot_artist_streamgraph(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>artist_stream.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f6a42ac4" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_streamgraph <span class="im">import</span> plot_artist_streamgraph</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>artist_stream <span class="op">=</span> plot_artist_streamgraph(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>artist_stream.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-f06b4585511c46db95e20f27612a73d0.vega-embed {
+  #altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f06b4585511c46db95e20f27612a73d0.vega-embed details,
-  #altair-viz-f06b4585511c46db95e20f27612a73d0.vega-embed details summary {
+  #altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c.vega-embed details,
+  #altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f06b4585511c46db95e20f27612a73d0"></div>
+<div id="altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f06b4585511c46db95e20f27612a73d0") {
-      outputDiv = document.getElementById("altair-viz-f06b4585511c46db95e20f27612a73d0");
+    if (outputDiv.id !== "altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c") {
+      outputDiv = document.getElementById("altair-viz-bc550431017e40e9b7ce7c4ce0c42a4c");
     }
 
     const paths = {
@@ -1143,30 +1119,31 @@ if (outputEl) {{
 </section>
 <section id="distribución-radial-por-artista-y-género" class="level2">
 <h2 class="anchored" data-anchor-id="distribución-radial-por-artista-y-género">Distribución Radial por Artista y Género</h2>
-<div id="4891dc28" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_category <span class="im">import</span> plot_artist_radial</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>radial_chart <span class="op">=</span> plot_artist_radial(df_exploded_track_list, top_n<span class="op">=</span><span class="dv">35</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>radial_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Muestra los artistas que mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.</p>
+<div id="57184aac" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_category <span class="im">import</span> plot_artist_radial</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>radial_chart <span class="op">=</span> plot_artist_radial(df_exploded_track_list, top_n<span class="op">=</span><span class="dv">35</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>radial_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-af6225998c494aa8b94395f5775d5135.vega-embed {
+  #altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-af6225998c494aa8b94395f5775d5135.vega-embed details,
-  #altair-viz-af6225998c494aa8b94395f5775d5135.vega-embed details summary {
+  #altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04.vega-embed details,
+  #altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-af6225998c494aa8b94395f5775d5135"></div>
+<div id="altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-af6225998c494aa8b94395f5775d5135") {
-      outputDiv = document.getElementById("altair-viz-af6225998c494aa8b94395f5775d5135");
+    if (outputDiv.id !== "altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04") {
+      outputDiv = document.getElementById("altair-viz-e2f08ebf2bbe49abaa31a8a2105e5d04");
     }
 
     const paths = {

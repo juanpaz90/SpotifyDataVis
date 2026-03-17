@@ -9,8 +9,8 @@ website:
     left:
       - href: index.qmd
         text: "Inicio"
-      - href: spotify_analisis.qmd
-        text: "Q1: Evolución Musical"
+      - href: music_evolution.qmd
+        text: "Evolución Musical"
 
 format:
   html:

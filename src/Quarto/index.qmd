@@ -2,32 +2,36 @@
 title: "Análisis de Datos de Spotify: Evolución Musical"
 subtitle: "Una inmersión analítica en el comportamiento de escucha y descubrimiento de géneros"
 author: "Juan Pazmino"
-output: html
+format: html
+jupyter: python3
 ---
 
-# Configuracion Inicial
-En esta sección configuramos las librerías necesarias, incluyendo los módulos personalizados y las rutas donde se alojan nuestros datos extraídos de Spotify.
 ```{python}
+#| label: setup
+#| include: false
 import sys
 import os
+import yaml
+import pandas as pd
+
+with open('_variables.yml', 'r') as file:
+    vars_config = yaml.safe_load(file)
 project_root = os.path.abspath('/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src')
 sys.path.append(project_root)
 
-
-import pandas as pd
-from Modules.read_data import read_data
-from Modules.handle_time import transform_time_and_duration
+from Modules.read_data import *
+from Modules.handle_time import *
 from Modules.handle_genres import *
-from Graphics.taste_evolution import plot_taste_evolution
+from Graphics.taste_evolution import *
 
-data_path_25 = '/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2025/'
-data_path_26 = '/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/data/2026/'
+data_path_25 = vars_config['data_path_25']
+data_path_26 = vars_config['data_path_26']
 
-saved_tracks_25 = 'saved_tracks_20251018.csv'
-track_details_25 = 'track_details_20251018.csv'
+saved_tracks_25 = vars_config['saved_tracks_25']
+track_details_25 = vars_config['track_details_25']
 ```
 
-# Lectura y Procesamiento de los datos
+# Lectura y Procesamiento
 Aplicamos transformaciones iniciales, hacemos el cruce (merge) entre los tracks guardados y sus metadatos, y normalizamos los géneros musicales.
 ```{python}
 df_saved_tracks_25 = read_data(data_path_25, saved_tracks_25)
@@ -44,7 +48,7 @@ df_saved_tracks_25.head()
 df_track_details_25.head()
 ```
 
-## Haciendo un merge de los datasets
+## Merge de los datasets
 - Seleccionar solo las columnas clave (ID y Géneros) de los detalles para hacer el cruce
 - Hacer un Left Join para añadir los géneros a la tabla principal de canciones guardadas
 ```{python}
@@ -54,13 +58,13 @@ merged_list_details = pd.merge(df_saved_tracks_25, track_details_subset, on='tra
 merged_list_details.head()
 ```
 
-## Transformar fechas y aplicar limpieza a las duraciones
+## Transformar fechas
 ```{python}
 df_clean_track_list = transform_time_and_duration(merged_list_details)
 df_clean_track_list.head()
 ```
 
-## Expandir (explode) las listas de géneros para que cada track tenga una fila por género asociado
+## Expandir (explode) las listas de géneros
 ```{python}
 df_exploded_track_list = explode_genres(df_clean_track_list)
 df_exploded_track_list.head()
@@ -69,14 +73,14 @@ df_exploded_track_list.head()
 # Generos Musicales en mi biblioteca
 Se empieza con un analisis de los principales generos que componenen mi biblioteca musical, esto nos da una idea general de mis preferencias musicales.
 
-## Gráfico de barras interactivas que desglosa las familias de géneros principales
+## Gráfico de las familias de géneros principales
 ```{python}
 from Graphics.genre_hierarchy import plot_genre_hierarchy
 breakdown_chart = plot_genre_hierarchy(df_exploded_track_list)
 breakdown_chart.display()
 ```
 
-## Cómo fluyen las macro-categorías hacia los subgéneros más específicos
+## Macro-categorías hacia subgéneros
 ```{python}
 from Graphics.sankey_diagram import plot_genre_sankey
 sankey_chart = plot_genre_sankey(df_exploded_track_list, top_parents_n=7, top_subs_n=3)
@@ -108,14 +112,9 @@ artist_stream.display()
 ```
 
 ## Distribución Radial por Artista y Género
+Muestra los artistas que mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.
 ```{python}
 from Graphics.genre_category import plot_artist_radial
 radial_chart = plot_artist_radial(df_exploded_track_list, top_n=35)
 radial_chart.display()
-```
-
-```{python}
-```
-
-```{python}
 ```
