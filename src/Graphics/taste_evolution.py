@@ -114,8 +114,3 @@ def plot_taste_evolution(df_exploded: pd.DataFrame, top_parents_n: int) -> alt.C
     )
     
     return chart
-
-# Example usage in Jupyter/Quarto:
-# from q1_taste_evolution import plot_taste_evolution
-# chart_q1 = plot_taste_evolution(df_exploded, top_parents_n=6)
-# chart_q1.display()

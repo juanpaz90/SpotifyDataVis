@@ -62,11 +62,3 @@ def plot_artist_streamgraph(df: pd.DataFrame, top_n: int) -> alt.Chart:
     )
     
     return chart
-
-# Example usage in Jupyter/Quarto:
-# from q1_genre_breakdown import plot_genre_sankey, plot_artist_streamgraph
-# sankey_chart = plot_genre_sankey(df_exploded, top_parents_n=5, top_subs_n=7)
-# sankey_chart.show()
-# 
-# artist_chart = plot_artist_streamgraph(df_clean, top_n=15)
-# artist_chart.display()

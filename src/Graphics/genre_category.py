@@ -102,8 +102,3 @@ def plot_artist_radial(df_exploded: pd.DataFrame, top_n: int) -> alt.Chart:
     )
     
     return chart
-
-# Example usage in Jupyter/Quarto:
-# from q1_artist_radial import plot_artist_radial
-# radial_chart = plot_artist_radial(df_exploded, top_n=25)
-# radial_chart.display()

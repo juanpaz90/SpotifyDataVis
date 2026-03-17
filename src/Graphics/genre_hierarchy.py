@@ -96,8 +96,3 @@ def plot_genre_hierarchy(df_exploded: pd.DataFrame) -> alt.VConcatChart:
     )
 
     return dashboard
-
-# Example usage:
-# from q1_genre_breakdown import plot_genre_hierarchy
-# breakdown_chart = plot_genre_hierarchy(df_exploded)
-# breakdown_chart.display()
