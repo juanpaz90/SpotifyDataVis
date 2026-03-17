@@ -208,3 +208,8 @@ __marimo__/
 .env
 
 /data
+/src/Quarto/_freeze
+*/_freeze
+*/.quarto
+/.quarto/
+**/*.quarto_ipynb
