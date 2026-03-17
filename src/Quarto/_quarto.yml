@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: _site
+  output-dir: /Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/docs
 
 website:
   title: "Spotify Data Analytics"
