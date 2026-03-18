@@ -172,7 +172,7 @@
     "href": "popularity_bias.html",
     "title": "Sesgo de popularidad",
     "section": "",
-    "text": "Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+    "text": "Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
   },
   {
     "objectID": "popularity_bias.html#sesgo-de-popularidad-por-año",
@@ -187,5 +187,26 @@
     "title": "Sesgo de popularidad",
     "section": "",
     "text": "Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#cual-es-el-sesgo-de-popularidad-anual",
+    "href": "popularity_bias.html#cual-es-el-sesgo-de-popularidad-anual",
+    "title": "Sesgo de popularidad",
+    "section": "",
+    "text": "Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#sesgo-de-popularidad-de-toda-la-biblioteca-musical",
+    "href": "popularity_bias.html#sesgo-de-popularidad-de-toda-la-biblioteca-musical",
+    "title": "Sesgo de popularidad",
+    "section": "Sesgo de popularidad de toda la biblioteca musical",
+    "text": "Sesgo de popularidad de toda la biblioteca musical\nFacilmente se puede indentificar si la biblioteca se inclina mas a generos de nicho o mainstream.\n\nfrom Graphics.popularity_bias import plot_overall_popularity_donut\nchart_q2_overall = plot_overall_popularity_donut(df_clean_track_list)\nchart_q2_overall.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#sesgo-de-popularidad-anual",
+    "href": "popularity_bias.html#sesgo-de-popularidad-anual",
+    "title": "Sesgo de popularidad",
+    "section": "",
+    "text": "Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
   }
 ]

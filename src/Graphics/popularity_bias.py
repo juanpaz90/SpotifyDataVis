@@ -103,7 +103,74 @@ def plot_popularity_bias(df_clean: pd.DataFrame) -> alt.LayerChart:
     
     return layered_chart
 
+def plot_overall_popularity_donut(df_clean: pd.DataFrame) -> alt.LayerChart:
+    """
+    Creates a Donut Chart showing the overall proportion of tracks
+    in each popularity tier for the entire dataset.
+    """
+    tiers = [
+        'Underground', 'Cult Following', 'Established Subculture', 
+        'Mid-Tier', 'Commercial', 'Highly Popular', 'Mainstream'
+    ]
+    # Consistent color mapping from niche (purple) to mainstream (green)
+    colors = ['#4a148c', '#7b1fa2', '#9c27b0', '#1e88e5', '#00acc1', '#43a047', '#1db954']
+    
+    # Map popularity to tiers
+    bins = [-1, 10, 25, 40, 60, 75, 90, 100]
+    df_copy = df_clean.copy()
+    df_copy['tier'] = pd.cut(df_copy['popularity'], bins=bins, labels=tiers)
+    
+    # Aggregate counts
+    tier_counts = df_copy['tier'].value_counts().reset_index()
+    tier_counts.columns = ['tier', 'count']
+    
+    # Calculate percentage for tooltip
+    total_tracks = tier_counts['count'].sum()
+    tier_counts['percentage'] = (tier_counts['count'] / total_tracks) * 100
+    
+    # Build Altair Radial Bar/Donut Chart
+    base = alt.Chart(tier_counts).encode(
+        theta=alt.Theta('count:Q', stack=True),
+        color=alt.Color('tier:N', 
+                        title='Popularity Tier',
+                        scale=alt.Scale(domain=tiers, range=colors),
+                        legend=alt.Legend(orient='right', titleFontSize=14, labelFontSize=12))
+    )
+    
+    # Inner Radius creates the "donut hole"
+    donut = base.mark_arc(innerRadius=120, stroke='#2b2b2b', strokeWidth=2).encode(
+        tooltip=[
+            alt.Tooltip('tier:N', title='Tier'),
+            alt.Tooltip('count:Q', title='Tracks'),
+            alt.Tooltip('percentage:Q', title='Percentage (%)', format='.1f')
+        ]
+    )
+    
+    # Add text in the middle of the donut chart
+    text = alt.Chart(pd.DataFrame({'text': [f'Total Tracks:\n{total_tracks}']})).mark_text(
+        align='center', baseline='middle', fontSize=18, color='#dddddd', fontWeight='bold', dy=-5
+    ).encode(text='text:N')
+
+    # Apply global dark theme configurations
+    chart = (donut + text).properties(
+        width=550,
+        height=450,
+        title='Overall Dataset Popularity Breakdown'
+    ).configure(
+        background='#2b2b2b'
+    ).configure_legend(
+        labelColor='#dddddd',
+        titleColor='#dddddd'
+    ).configure_title(
+        color='#dddddd',
+        fontSize=18
+    ).configure_view(
+        stroke='transparent'
+    )
+    
+    return chart
+
 # Example usage in Jupyter/Quarto:
-# from q2_popularity_bias import plot_popularity_bias
-# chart_q2 = plot_popularity_bias(df_clean)
-# chart_q2.display()
+# from q2_popularity_bias import plot_popularity_bias, plot_overall_popularity_donut
+# chart_q2_timeline = plot_popularity_bias(df_clean)
+# chart_q2_overall = plot_overall_popularity_donut(df_clean)

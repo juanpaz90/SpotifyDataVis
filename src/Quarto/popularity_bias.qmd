@@ -4,8 +4,6 @@ format: html
 jupyter: python3
 ---
 
-## Cual es el sesgo de popularidad en mi biblioteca?
-Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año. 
 ```{python}
 #| label: setup
 #| include: false
@@ -23,6 +21,7 @@ from Modules.read_data import *
 from Modules.handle_time import *
 from Modules.handle_genres import *
 from Graphics.taste_evolution import *
+from Graphics.popularity_bias import *
 
 data_path_25 = vars_config['data_path_25']
 data_path_26 = vars_config['data_path_26']
@@ -45,8 +44,18 @@ df_clean_track_list.head()
 df_exploded_track_list = explode_genres(df_clean_track_list)
 ```
 
+## Sesgo de popularidad anual
+Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.
 ```{python}
 from Graphics.popularity_bias import plot_popularity_bias
 chart_q2 = plot_popularity_bias(df_clean_track_list)
 chart_q2.display()
+```
+
+## Sesgo de popularidad de toda la biblioteca musical
+Facilmente se puede indentificar si la biblioteca se inclina mas a generos de nicho o mainstream. 
+```{python}
+from Graphics.popularity_bias import plot_overall_popularity_donut
+chart_q2_overall = plot_overall_popularity_donut(df_clean_track_list)
+chart_q2_overall.display()
 ```
