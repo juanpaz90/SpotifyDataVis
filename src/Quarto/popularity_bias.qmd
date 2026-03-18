@@ -1,3 +1,11 @@
+---
+title: "Sesgo de popularidad"
+format: html
+jupyter: python3
+---
+
+## Cual es el sesgo de popularidad en mi biblioteca?
+Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año. 
 ```{python}
 #| label: setup
 #| include: false
@@ -38,7 +46,7 @@ df_exploded_track_list = explode_genres(df_clean_track_list)
 ```
 
 ```{python}
-from Graphics.bias_popularity import analyze_popularity_bias
-chart_q2 = analyze_popularity_bias(df_clean_track_list)
+from Graphics.popularity_bias import plot_popularity_bias
+chart_q2 = plot_popularity_bias(df_clean_track_list)
 chart_q2.display()
 ```

@@ -166,5 +166,26 @@
     "title": "Evolución musical",
     "section": "",
     "text": "A continuación se muestra el numero de tracks categorizados por genero que se han añadido durante los años.\n\nfrom Graphics.taste_evolution import plot_taste_evolution\nchart_q1 = plot_taste_evolution(df_exploded_track_list, top_parents_n=10)\nchart_q1.display()\n\n/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src/Graphics/taste_evolution.py:24: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.\n  df['added_year_month'] = df['added_at'].dt.to_period('M').dt.to_timestamp()"
+  },
+  {
+    "objectID": "popularity_bias.html",
+    "href": "popularity_bias.html",
+    "title": "Sesgo de popularidad",
+    "section": "",
+    "text": "Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#sesgo-de-popularidad-por-año",
+    "href": "popularity_bias.html#sesgo-de-popularidad-por-año",
+    "title": "Sesgo de popularidad",
+    "section": "",
+    "text": "from Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#cual-es-el-sesgo-de-popularidad-en-mi-biblioteca",
+    "href": "popularity_bias.html#cual-es-el-sesgo-de-popularidad-en-mi-biblioteca",
+    "title": "Sesgo de popularidad",
+    "section": "",
+    "text": "Se identifica si la biblioteca se inclina a generos de nicho o mainstream en cada año.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
   }
 ]

@@ -11,6 +11,8 @@ website:
         text: "Inicio"
       - href: music_evolution.qmd
         text: "Evolución Musical"
+      - href: popularity_bias.qmd
+        text: "Sesgo de popularidad"
 
 format:
   html:
