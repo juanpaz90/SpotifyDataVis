@@ -208,5 +208,12 @@
     "title": "Sesgo de popularidad",
     "section": "",
     "text": "Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.\n\nfrom Graphics.popularity_bias import plot_popularity_bias\nchart_q2 = plot_popularity_bias(df_clean_track_list)\nchart_q2.display()"
+  },
+  {
+    "objectID": "popularity_bias.html#composición-de-generos-por-nivel-de-popularidad",
+    "href": "popularity_bias.html#composición-de-generos-por-nivel-de-popularidad",
+    "title": "Sesgo de popularidad",
+    "section": "Composición de generos por nivel de popularidad",
+    "text": "Composición de generos por nivel de popularidad\nEste grafico pemite observar la cantidad de canciones por genero musical y su popularidad dentro de mi biblioteca musical.\n\nfrom Graphics.popularity_bias import plot_genre_popularity_breakdown\nchart_q2_genres = plot_genre_popularity_breakdown(df_exploded_track_list)\nchart_q2_genres.display()"
   }
 ]

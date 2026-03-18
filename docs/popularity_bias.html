@@ -157,6 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#sesgo-de-popularidad-anual" id="toc-sesgo-de-popularidad-anual" class="nav-link active" data-scroll-target="#sesgo-de-popularidad-anual">Sesgo de popularidad anual</a></li>
   <li><a href="#sesgo-de-popularidad-de-toda-la-biblioteca-musical" id="toc-sesgo-de-popularidad-de-toda-la-biblioteca-musical" class="nav-link" data-scroll-target="#sesgo-de-popularidad-de-toda-la-biblioteca-musical">Sesgo de popularidad de toda la biblioteca musical</a></li>
+  <li><a href="#composición-de-generos-por-nivel-de-popularidad" id="toc-composición-de-generos-por-nivel-de-popularidad" class="nav-link" data-scroll-target="#composición-de-generos-por-nivel-de-popularidad">Composición de generos por nivel de popularidad</a></li>
   </ul>
 </nav>
     </div>
@@ -185,30 +186,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sesgo-de-popularidad-anual" class="level2">
 <h2 class="anchored" data-anchor-id="sesgo-de-popularidad-anual">Sesgo de popularidad anual</h2>
 <p>Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.</p>
-<div id="a907ad47" class="cell" data-execution_count="2">
+<div id="96c1798f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_popularity_bias</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>chart_q2 <span class="op">=</span> plot_popularity_bias(df_clean_track_list)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chart_q2.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-d4c454b52bf64781a1c22b96f524b034.vega-embed {
+  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d4c454b52bf64781a1c22b96f524b034.vega-embed details,
-  #altair-viz-d4c454b52bf64781a1c22b96f524b034.vega-embed details summary {
+  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed details,
+  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d4c454b52bf64781a1c22b96f524b034"></div>
+<div id="altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d4c454b52bf64781a1c22b96f524b034") {
-      outputDiv = document.getElementById("altair-viz-d4c454b52bf64781a1c22b96f524b034");
+    if (outputDiv.id !== "altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df") {
+      outputDiv = document.getElementById("altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df");
     }
 
     const paths = {
@@ -264,30 +265,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sesgo-de-popularidad-de-toda-la-biblioteca-musical" class="level2">
 <h2 class="anchored" data-anchor-id="sesgo-de-popularidad-de-toda-la-biblioteca-musical">Sesgo de popularidad de toda la biblioteca musical</h2>
 <p>Facilmente se puede indentificar si la biblioteca se inclina mas a generos de nicho o mainstream.</p>
-<div id="a86bb40b" class="cell" data-execution_count="3">
+<div id="42e7d2bc" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_overall_popularity_donut</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>chart_q2_overall <span class="op">=</span> plot_overall_popularity_donut(df_clean_track_list)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chart_q2_overall.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-658900eb725d49689615eff8746df0a9.vega-embed {
+  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-658900eb725d49689615eff8746df0a9.vega-embed details,
-  #altair-viz-658900eb725d49689615eff8746df0a9.vega-embed details summary {
+  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed details,
+  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-658900eb725d49689615eff8746df0a9"></div>
+<div id="altair-viz-b67462104c2040d9901545a15518bbf9"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-658900eb725d49689615eff8746df0a9") {
-      outputDiv = document.getElementById("altair-viz-658900eb725d49689615eff8746df0a9");
+    if (outputDiv.id !== "altair-viz-b67462104c2040d9901545a15518bbf9") {
+      outputDiv = document.getElementById("altair-viz-b67462104c2040d9901545a15518bbf9");
     }
 
     const paths = {
@@ -336,6 +337,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         .then(() => displayChart(vegaEmbed));
     }
   })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": "transparent"}, "background": "#2b2b2b", "legend": {"labelColor": "#dddddd", "titleColor": "#dddddd"}, "title": {"color": "#dddddd", "fontSize": 18}}, "layer": [{"data": {"name": "data-e4fc885132538fe0bf5b1d4e92744183"}, "mark": {"type": "arc", "innerRadius": 120, "stroke": "#2b2b2b", "strokeWidth": 2}, "encoding": {"color": {"field": "tier", "legend": {"labelFontSize": 12, "orient": "right", "titleFontSize": 14}, "scale": {"domain": ["Underground", "Cult Following", "Established Subculture", "Mid-Tier", "Commercial", "Highly Popular", "Mainstream"], "range": ["#4a148c", "#7b1fa2", "#9c27b0", "#1e88e5", "#00acc1", "#43a047", "#1db954"]}, "title": "Popularity Tier", "type": "nominal"}, "theta": {"field": "count", "stack": true, "type": "quantitative"}, "tooltip": [{"field": "tier", "title": "Tier", "type": "nominal"}, {"field": "count", "title": "Tracks", "type": "quantitative"}, {"field": "percentage", "format": ".1f", "title": "Percentage (%)", "type": "quantitative"}]}}, {"data": {"name": "data-0c92327aa7a9921100093d3b3531f6ed"}, "mark": {"type": "text", "align": "center", "baseline": "middle", "color": "#dddddd", "dy": -5, "fontSize": 18, "fontWeight": "bold"}, "encoding": {"text": {"field": "text", "type": "nominal"}}}], "height": 450, "title": "Overall Dataset Popularity Breakdown", "width": 550, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-e4fc885132538fe0bf5b1d4e92744183": [{"tier": "Underground", "count": 1464, "percentage": 51.08164689462665}, {"tier": "Established Subculture", "count": 421, "percentage": 14.689462665736217}, {"tier": "Cult Following", "count": 403, "percentage": 14.061409630146546}, {"tier": "Mid-Tier", "count": 369, "percentage": 12.875087229588274}, {"tier": "Commercial", "count": 147, "percentage": 5.129099790648988}, {"tier": "Highly Popular", "count": 62, "percentage": 2.1632937892533146}, {"tier": "Mainstream", "count": 0, "percentage": 0.0}], "data-0c92327aa7a9921100093d3b3531f6ed": [{"text": "Total Tracks:\n2866"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="composición-de-generos-por-nivel-de-popularidad" class="level2">
+<h2 class="anchored" data-anchor-id="composición-de-generos-por-nivel-de-popularidad">Composición de generos por nivel de popularidad</h2>
+<p>Este grafico pemite observar la cantidad de canciones por genero musical y su popularidad dentro de mi biblioteca musical.</p>
+<div id="033dcf43" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_genre_popularity_breakdown</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>chart_q2_genres <span class="op">=</span> plot_genre_popularity_breakdown(df_exploded_track_list)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>chart_q2_genres.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+<style>
+  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed details,
+  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-0cc6e2049135442bb55c72dc1c1bcdac"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-0cc6e2049135442bb55c72dc1c1bcdac") {
+      outputDiv = document.getElementById("altair-viz-0cc6e2049135442bb55c72dc1c1bcdac");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@6?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@6.1.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@7?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "6")
+        .then(() => maybeLoadScript("vega-lite", "6.1.0"))
+        .then(() => maybeLoadScript("vega-embed", "7"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": "transparent"}, "axis": {"domainColor": "#777777", "grid": false, "labelColor": "#dddddd", "tickColor": "#777777", "titleColor": "#dddddd"}, "background": "#2b2b2b", "legend": {"labelColor": "#dddddd", "titleColor": "#dddddd"}, "title": {"color": "#dddddd", "fontSize": 18}}, "data": {"name": "data-f1ec0fd0a394639b72c7fddf2b1bd51a"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "parent_genre", "scale": {"domain": ["Classical, Cinematic & Ambient", "Electronic & Dance Music", "Folk, Country & Acoustic Roots", "Hip Hop, Rap & Trap", "Indie, Alternative & Experimental", "Jazz & Blues", "Latin, Caribbean & Global Rhythms", "Other", "Pop & Vocal", "R&B, Soul, Funk & Disco", "Rock, Punk & Heavy Metal"], "range": ["#4e79a7", "#f28e2c", "#e15759", "#76b7b2", "#59a14f", "#edc949", "#af7aa1", "#ff9da7", "#9c755f", "#bab0ab", "#4e79a7"]}, "title": "Genre Family", "type": "nominal"}, "tooltip": [{"field": "tier", "title": "Tier", "type": "nominal"}, {"field": "parent_genre", "title": "Genre Family", "type": "nominal"}, {"field": "count", "title": "Tracks", "type": "quantitative"}], "x": {"axis": {"labelAngle": -25}, "field": "tier", "sort": ["Underground", "Cult Following", "Established Subculture", "Mid-Tier", "Commercial", "Highly Popular", "Mainstream"], "title": "Popularity Tier", "type": "nominal"}, "y": {"axis": {"format": "%"}, "field": "count", "stack": "normalize", "title": "Proportion of Genres", "type": "quantitative"}}, "height": 450, "title": "Genre Composition by Popularity Level", "width": 700, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-f1ec0fd0a394639b72c7fddf2b1bd51a": [{"tier": "Underground", "parent_genre": "Classical, Cinematic & Ambient", "count": 18}, {"tier": "Underground", "parent_genre": "Electronic & Dance Music", "count": 3065}, {"tier": "Underground", "parent_genre": "Folk, Country & Acoustic Roots", "count": 9}, {"tier": "Underground", "parent_genre": "Hip Hop, Rap & Trap", "count": 38}, {"tier": "Underground", "parent_genre": "Indie, Alternative & Experimental", "count": 271}, {"tier": "Underground", "parent_genre": "Jazz & Blues", "count": 5}, {"tier": "Underground", "parent_genre": "Latin, Caribbean & Global Rhythms", "count": 16}, {"tier": "Underground", "parent_genre": "Other", "count": 33}, {"tier": "Underground", "parent_genre": "Pop & Vocal", "count": 103}, {"tier": "Underground", "parent_genre": "R&B, Soul, Funk & Disco", "count": 47}, {"tier": "Underground", "parent_genre": "Rock, Punk & Heavy Metal", "count": 169}, {"tier": "Cult Following", "parent_genre": "Classical, Cinematic & Ambient", "count": 12}, {"tier": "Cult Following", "parent_genre": "Electronic & Dance Music", "count": 1138}, {"tier": "Cult Following", "parent_genre": "Folk, Country & Acoustic Roots", "count": 1}, {"tier": "Cult Following", "parent_genre": "Hip Hop, Rap & Trap", "count": 12}, {"tier": "Cult Following", "parent_genre": "Indie, Alternative & Experimental", "count": 84}, {"tier": "Cult Following", "parent_genre": "Latin, Caribbean & Global Rhythms", "count": 1}, {"tier": "Cult Following", "parent_genre": "Other", "count": 9}, {"tier": "Cult Following", "parent_genre": "Pop & Vocal", "count": 23}, {"tier": "Cult Following", "parent_genre": "R&B, Soul, Funk & Disco", "count": 4}, {"tier": "Cult Following", "parent_genre": "Rock, Punk & Heavy Metal", "count": 19}, {"tier": "Established Subculture", "parent_genre": "Classical, Cinematic & Ambient", "count": 10}, {"tier": "Established Subculture", "parent_genre": "Electronic & Dance Music", "count": 1180}, {"tier": "Established Subculture", "parent_genre": "Folk, Country & Acoustic Roots", "count": 3}, {"tier": "Established Subculture", "parent_genre": "Hip Hop, Rap & Trap", "count": 23}, {"tier": "Established Subculture", "parent_genre": "Indie, Alternative & Experimental", "count": 72}, {"tier": "Established Subculture", "parent_genre": "Jazz & Blues", "count": 4}, {"tier": "Established Subculture", "parent_genre": "Latin, Caribbean & Global Rhythms", "count": 7}, {"tier": "Established Subculture", "parent_genre": "Other", "count": 17}, {"tier": "Established Subculture", "parent_genre": "Pop & Vocal", "count": 26}, {"tier": "Established Subculture", "parent_genre": "R&B, Soul, Funk & Disco", "count": 15}, {"tier": "Established Subculture", "parent_genre": "Rock, Punk & Heavy Metal", "count": 42}, {"tier": "Mid-Tier", "parent_genre": "Classical, Cinematic & Ambient", "count": 5}, {"tier": "Mid-Tier", "parent_genre": "Electronic & Dance Music", "count": 889}, {"tier": "Mid-Tier", "parent_genre": "Folk, Country & Acoustic Roots", "count": 1}, {"tier": "Mid-Tier", "parent_genre": "Hip Hop, Rap & Trap", "count": 29}, {"tier": "Mid-Tier", "parent_genre": "Indie, Alternative & Experimental", "count": 38}, {"tier": "Mid-Tier", "parent_genre": "Jazz & Blues", "count": 4}, {"tier": "Mid-Tier", "parent_genre": "Latin, Caribbean & Global Rhythms", "count": 13}, {"tier": "Mid-Tier", "parent_genre": "Other", "count": 13}, {"tier": "Mid-Tier", "parent_genre": "Pop & Vocal", "count": 31}, {"tier": "Mid-Tier", "parent_genre": "R&B, Soul, Funk & Disco", "count": 15}, {"tier": "Mid-Tier", "parent_genre": "Rock, Punk & Heavy Metal", "count": 89}, {"tier": "Commercial", "parent_genre": "Electronic & Dance Music", "count": 121}, {"tier": "Commercial", "parent_genre": "Hip Hop, Rap & Trap", "count": 22}, {"tier": "Commercial", "parent_genre": "Indie, Alternative & Experimental", "count": 20}, {"tier": "Commercial", "parent_genre": "Latin, Caribbean & Global Rhythms", "count": 5}, {"tier": "Commercial", "parent_genre": "Other", "count": 8}, {"tier": "Commercial", "parent_genre": "Pop & Vocal", "count": 20}, {"tier": "Commercial", "parent_genre": "R&B, Soul, Funk & Disco", "count": 7}, {"tier": "Commercial", "parent_genre": "Rock, Punk & Heavy Metal", "count": 76}, {"tier": "Highly Popular", "parent_genre": "Electronic & Dance Music", "count": 17}, {"tier": "Highly Popular", "parent_genre": "Folk, Country & Acoustic Roots", "count": 1}, {"tier": "Highly Popular", "parent_genre": "Hip Hop, Rap & Trap", "count": 12}, {"tier": "Highly Popular", "parent_genre": "Indie, Alternative & Experimental", "count": 10}, {"tier": "Highly Popular", "parent_genre": "Other", "count": 1}, {"tier": "Highly Popular", "parent_genre": "Pop & Vocal", "count": 10}, {"tier": "Highly Popular", "parent_genre": "R&B, Soul, Funk & Disco", "count": 11}, {"tier": "Highly Popular", "parent_genre": "Rock, Punk & Heavy Metal", "count": 41}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
