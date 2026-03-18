@@ -107,12 +107,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script>
-window.PlotlyConfig = {MathJaxConfig: 'local'};
-if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
-</script>
-<script type="module">import "https://cdn.plot.ly/plotly-3.4.0.min"</script>
-
 
 
 </head>
@@ -135,11 +129,11 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./procesamiento.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Procesamiento</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./procesamiento.html"> 
 <span class="menu-text">Generos</span></a>
   </li>  
   <li class="nav-item">
@@ -170,10 +164,16 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#generos-musicales-en-mi-biblioteca" id="toc-generos-musicales-en-mi-biblioteca" class="nav-link active" data-scroll-target="#generos-musicales-en-mi-biblioteca">Generos Musicales en mi biblioteca</a>
+  <li><a href="#problema" id="toc-problema" class="nav-link active" data-scroll-target="#problema">Problema</a></li>
+  <li><a href="#contexto" id="toc-contexto" class="nav-link" data-scroll-target="#contexto">Contexto</a></li>
+  <li><a href="#dataset-seleccionado" id="toc-dataset-seleccionado" class="nav-link" data-scroll-target="#dataset-seleccionado">Dataset seleccionado</a></li>
+  <li><a href="#lectura-y-procesamiento" id="toc-lectura-y-procesamiento" class="nav-link" data-scroll-target="#lectura-y-procesamiento">Lectura y Procesamiento</a>
   <ul class="collapse">
-  <li><a href="#gráfico-de-las-familias-de-géneros-principales" id="toc-gráfico-de-las-familias-de-géneros-principales" class="nav-link" data-scroll-target="#gráfico-de-las-familias-de-géneros-principales">Gráfico de las familias de géneros principales</a></li>
-  <li><a href="#macro-categorías-hacia-subgéneros" id="toc-macro-categorías-hacia-subgéneros" class="nav-link" data-scroll-target="#macro-categorías-hacia-subgéneros">Macro-categorías hacia subgéneros</a></li>
+  <li><a href="#lista-completa-de-traks-alamcenados" id="toc-lista-completa-de-traks-alamcenados" class="nav-link" data-scroll-target="#lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</a></li>
+  <li><a href="#metadata-de-los-tracks" id="toc-metadata-de-los-tracks" class="nav-link" data-scroll-target="#metadata-de-los-tracks">Metadata de los tracks</a></li>
+  <li><a href="#merge-de-los-datasets" id="toc-merge-de-los-datasets" class="nav-link" data-scroll-target="#merge-de-los-datasets">Merge de los datasets</a></li>
+  <li><a href="#transformar-fechas" id="toc-transformar-fechas" class="nav-link" data-scroll-target="#transformar-fechas">Transformar fechas</a></li>
+  <li><a href="#expandir-explode-las-listas-de-géneros" id="toc-expandir-explode-las-listas-de-géneros" class="nav-link" data-scroll-target="#expandir-explode-las-listas-de-géneros">Expandir (explode) las listas de géneros</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -207,120 +207,571 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </header>
 
 
-<section id="generos-musicales-en-mi-biblioteca" class="level1">
-<h1>Generos Musicales en mi biblioteca</h1>
-<p>Se empieza con un analisis de los principales generos que componenen mi biblioteca musical, esto nos da una idea general de mis preferencias musicales.</p>
-<section id="gráfico-de-las-familias-de-géneros-principales" class="level2">
-<h2 class="anchored" data-anchor-id="gráfico-de-las-familias-de-géneros-principales">Gráfico de las familias de géneros principales</h2>
-<div id="29e20e07" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_hierarchy <span class="im">import</span> plot_genre_hierarchy</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>breakdown_chart <span class="op">=</span> plot_genre_hierarchy(df_exploded_track_list)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>breakdown_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<section id="problema" class="level1">
+<h1>Problema</h1>
+<p>Este proyecto se enmarca en el análisis de datos aplicado al comportamiento personal, específicamente en el dominio del consumo musical. A partir de datos obtenidos del API de Spotify, se busca analizar cómo han evolucionado mis hábitos de escucha a lo largo del tiempo, considerando aspectos como géneros, artistas, popularidad y atributos musicales.</p>
+</section>
+<section id="contexto" class="level1">
+<h1>Contexto</h1>
+<p>La motivación principal radica en entender de forma objetiva una experiencia que normalmente es subjetiva: mi relación con la música. Dado que la música ha sido una constante en mi vida, este análisis permite transformar patrones de escucha en información cuantificable, facilitando el autoconocimiento mediante datos.</p>
+<p>A través de técnicas de visualización, el proyecto busca responder tres preguntas clave:<br>
+- <em>¿Cómo ha evolucionado mi gusto musical con el tiempo?</em>.<br>
+- <em>¿Existe un sesgo hacia música mainstream o de nicho?</em>.<br>
+- <em>¿Cómo influyen variables como la duración, popularidad y género en mi biblioteca musical?</em></p>
+</section>
+<section id="dataset-seleccionado" class="level1">
+<h1>Dataset seleccionado</h1>
+<p>El dataset utilizado proviene del API de Spotify y está compuesto por información personal de canciones guardadas (<code>saved tracks</code>) y sus respectivos detalles (<code>track details</code>), recolectados durante todo el tiempo de vida de la cuenta de Spotify. El conjunto de datos contiene múltiples observaciones correspondientes a canciones almacenadas en la biblioteca personal, junto con sus metadatos asociados. Entre las variables principales se incluyen: identificador de la canción (<code>track_id</code>), fecha de agregado, duración, popularidad, y géneros musicales asociados a los artistas.</p>
+<p>En cuanto al tipo de variables, el dataset incluye: • Variables categóricas: géneros musicales, artistas • Variables numéricas: duración de la canción, popularidad • Variables temporales: fecha de agregado • Variables estructuradas: listas de géneros en cada cancion</p>
+<p>El dataset requiere procesamiento previo, incluyendo limpieza, transformación de fechas y duración, y normalización de géneros para permitir su análisis y visualización.</p>
+</section>
+<section id="lectura-y-procesamiento" class="level1">
+<h1>Lectura y Procesamiento</h1>
+<div id="9cd2c38a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25 <span class="op">=</span> read_data(data_path_25, saved_tracks_25)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_track_details_25 <span class="op">=</span> read_data(data_path_25, track_details_25)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="lista-completa-de-traks-alamcenados" class="level2">
+<h2 class="anchored" data-anchor-id="lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</h2>
+<div id="ff27d2b1" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
 
-<style>
-  #altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a.vega-embed {
-    width: 100%;
-    display: flex;
-  }
 
-  #altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a.vega-embed details,
-  #altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a.vega-embed details summary {
-    position: relative;
-  }
-</style>
-<div id="altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a") {
-      outputDiv = document.getElementById("altair-viz-6a6d57b2f31d453fb05b3bf2a1b3684a");
-    }
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">track_name</th>
+<th data-quarto-table-cell-role="th">artist_name</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">album_name</th>
+<th data-quarto-table-cell-role="th">album_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">added_at</th>
+<th data-quarto-table-cell-role="th">explicit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>227091</td>
+<td>0</td>
+<td>2025-10-17T20:33:46Z</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3G8AJXzCrwPCnHiQI1ENnm</td>
+<td>Plumbum</td>
+<td>1luu</td>
+<td>6H7YXIE4ZT1Nxa2krwL6N4</td>
+<td>Europium EP</td>
+<td>0l22YC5T2pj3MvIxPMt9iT</td>
+<td>2025-02-21</td>
+<td>361414</td>
+<td>9</td>
+<td>2025-10-14T23:36:59Z</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>4VmcBQm0YzgK0MU5geXmNA</td>
+<td>Godspeed</td>
+<td>ADB</td>
+<td>12YduHZJsgoAQlzLEDdT8T</td>
+<td>Godspeed</td>
+<td>0B3oIXhodX3Xb64ehNSAOn</td>
+<td>2025-01-31</td>
+<td>175889</td>
+<td>10</td>
+<td>2025-10-14T23:35:22Z</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>4wpX2rcuD8R6f9P78yzccy</td>
+<td>Timelapse</td>
+<td>TRYM</td>
+<td>5Nd385K2g3s0828W8Ab70z</td>
+<td>Timelapse</td>
+<td>4ZbUxkHSXVHU499uVMjawk</td>
+<td>2018-09-04</td>
+<td>370285</td>
+<td>27</td>
+<td>2025-10-11T03:51:31Z</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>7pt0UDWnpiVJ1uEMP5iM0P</td>
+<td>No Broke Boys - Lee Foss Remix</td>
+<td>Disco Lines, Tinashe, Lee Foss</td>
+<td>5Kmr0b3ip8g9P2i0dLTC3Z</td>
+<td>No Broke Boys (Lee Foss Remix)</td>
+<td>4pWH8vGb2ZmwdAdZqMqcJO</td>
+<td>2025-10-03</td>
+<td>209333</td>
+<td>56</td>
+<td>2025-10-03T21:24:49Z</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
 
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm/vega@6?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@6.1.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@7?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      let deps = ["vega-embed"];
-      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "6")
-        .then(() => maybeLoadScript("vega-lite", "6.1.0"))
-        .then(() => maybeLoadScript("vega-embed", "7"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": "transparent"}, "axis": {"domainColor": "#777777", "grid": true, "gridColor": "#444444", "labelColor": "#dddddd", "tickColor": "#777777", "titleColor": "#dddddd"}, "background": "#2b2b2b", "title": {"anchor": "start", "color": "#ffffff", "fontSize": 14}}, "hconcat": [{"mark": {"type": "bar", "cornerRadiusEnd": 4}, "encoding": {"color": {"field": "parent_genre", "legend": null, "scale": {"domain": ["Classical, Cinematic & Ambient", "Electronic & Dance Music", "Folk, Country & Acoustic Roots", "Hip Hop, Rap & Trap", "Indie, Alternative & Experimental", "Jazz & Blues", "Latin, Caribbean & Global Rhythms", "Other", "Pop & Vocal", "R&B, Soul, Funk & Disco", "Rock, Punk & Heavy Metal"], "range": ["#4e79a7", "#f28e2c", "#e15759", "#76b7b2", "#59a14f", "#edc949", "#af7aa1", "#ff9da7", "#9c755f", "#bab0ab", "#4e79a7"]}, "type": "nominal"}, "opacity": {"condition": {"param": "param_3fd43df63818d97d", "value": 1.0}, "value": 0.3}, "tooltip": [{"field": "parent_genre", "title": "Category", "type": "nominal"}, {"aggregate": "sum", "field": "track_count", "title": "Total Tracks", "type": "quantitative"}], "x": {"aggregate": "sum", "field": "track_count", "title": "Total Tracks Saved", "type": "quantitative"}, "y": {"axis": {"labelLimit": 250}, "field": "parent_genre", "sort": "-x", "title": "", "type": "nominal"}}, "height": 400, "name": "view_2d2dabde32795579_0", "title": "1. Select a Parent Genre", "width": 300}, {"mark": {"type": "bar", "cornerRadiusEnd": 4}, "encoding": {"color": {"field": "parent_genre", "legend": null, "scale": {"domain": ["Classical, Cinematic & Ambient", "Electronic & Dance Music", "Folk, Country & Acoustic Roots", "Hip Hop, Rap & Trap", "Indie, Alternative & Experimental", "Jazz & Blues", "Latin, Caribbean & Global Rhythms", "Other", "Pop & Vocal", "R&B, Soul, Funk & Disco", "Rock, Punk & Heavy Metal"], "range": ["#4e79a7", "#f28e2c", "#e15759", "#76b7b2", "#59a14f", "#edc949", "#af7aa1", "#ff9da7", "#9c755f", "#bab0ab", "#4e79a7"]}, "type": "nominal"}, "tooltip": [{"field": "genre_list", "title": "Sub-genre", "type": "nominal"}, {"field": "track_count", "title": "Tracks", "type": "quantitative"}], "x": {"field": "track_count", "title": "Tracks Saved", "type": "quantitative"}, "y": {"axis": {"labelLimit": 250}, "field": "genre_list", "sort": "-x", "title": "", "type": "nominal"}}, "height": 400, "title": "2. Top 15 Sub-genres Breakdown", "transform": [{"filter": {"param": "param_3fd43df63818d97d"}}, {"window": [{"op": "rank", "field": "track_count", "as": "rank"}], "sort": [{"field": "track_count", "order": "descending"}]}, {"filter": "(datum.rank <= 12)"}], "width": 350}], "data": {"name": "data-010d544f9d03e3b763dbbe17f8b05a15"}, "params": [{"name": "param_3fd43df63818d97d", "select": {"type": "point", "fields": ["parent_genre"]}, "value": [{"parent_genre": "Electronic & Dance Music"}], "views": ["view_2d2dabde32795579_0"]}], "resolve": {"scale": {"y": "independent"}}, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-010d544f9d03e3b763dbbe17f8b05a15": [{"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "ambient", "track_count": 2}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "chamber music", "track_count": 2}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "christmas", "track_count": 1}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "classical", "track_count": 5}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "dark ambient", "track_count": 4}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "lo-fi", "track_count": 8}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "lo-fi beats", "track_count": 8}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "neoclassical", "track_count": 4}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "opera", "track_count": 2}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "orchestral", "track_count": 4}, {"parent_genre": "Classical, Cinematic & Ambient", "genre_list": "soundtrack", "track_count": 5}, {"parent_genre": "Electronic & Dance Music", "genre_list": "3 step", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "acid house", "track_count": 15}, {"parent_genre": "Electronic & Dance Music", "genre_list": "acid techno", "track_count": 384}, {"parent_genre": "Electronic & Dance Music", "genre_list": "afro house", "track_count": 48}, {"parent_genre": "Electronic & Dance Music", "genre_list": "afro tech", "track_count": 15}, {"parent_genre": "Electronic & Dance Music", "genre_list": "ballroom vogue", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "baltimore club", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "bass house", "track_count": 16}, {"parent_genre": "Electronic & Dance Music", "genre_list": "bass music", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "bassline", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "big room", "track_count": 111}, {"parent_genre": "Electronic & Dance Music", "genre_list": "bounce", "track_count": 11}, {"parent_genre": "Electronic & Dance Music", "genre_list": "brazilian bass", "track_count": 9}, {"parent_genre": "Electronic & Dance Music", "genre_list": "breakbeat", "track_count": 20}, {"parent_genre": "Electronic & Dance Music", "genre_list": "cedm", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "chicago house", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "dance pop", "track_count": 2}, {"parent_genre": "Electronic & Dance Music", "genre_list": "deep house", "track_count": 157}, {"parent_genre": "Electronic & Dance Music", "genre_list": "disco house", "track_count": 50}, {"parent_genre": "Electronic & Dance Music", "genre_list": "drum and bass", "track_count": 18}, {"parent_genre": "Electronic & Dance Music", "genre_list": "drumstep", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "dub techno", "track_count": 19}, {"parent_genre": "Electronic & Dance Music", "genre_list": "dubstep", "track_count": 22}, {"parent_genre": "Electronic & Dance Music", "genre_list": "edm", "track_count": 254}, {"parent_genre": "Electronic & Dance Music", "genre_list": "edm trap", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "electro", "track_count": 48}, {"parent_genre": "Electronic & Dance Music", "genre_list": "electro house", "track_count": 44}, {"parent_genre": "Electronic & Dance Music", "genre_list": "electro swing", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "electroclash", "track_count": 51}, {"parent_genre": "Electronic & Dance Music", "genre_list": "electronica", "track_count": 66}, {"parent_genre": "Electronic & Dance Music", "genre_list": "eurodance", "track_count": 71}, {"parent_genre": "Electronic & Dance Music", "genre_list": "footwork", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "french house", "track_count": 127}, {"parent_genre": "Electronic & Dance Music", "genre_list": "frenchcore", "track_count": 6}, {"parent_genre": "Electronic & Dance Music", "genre_list": "funky house", "track_count": 39}, {"parent_genre": "Electronic & Dance Music", "genre_list": "future bass", "track_count": 24}, {"parent_genre": "Electronic & Dance Music", "genre_list": "future house", "track_count": 50}, {"parent_genre": "Electronic & Dance Music", "genre_list": "g-house", "track_count": 15}, {"parent_genre": "Electronic & Dance Music", "genre_list": "gabber", "track_count": 15}, {"parent_genre": "Electronic & Dance Music", "genre_list": "glitch", "track_count": 6}, {"parent_genre": "Electronic & Dance Music", "genre_list": "gqom", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "happy hardcore", "track_count": 9}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hard house", "track_count": 116}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hard techno", "track_count": 333}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hardcore techno", "track_count": 33}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hardstyle", "track_count": 10}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hi-nrg", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "house", "track_count": 138}, {"parent_genre": "Electronic & Dance Music", "genre_list": "hypertechno", "track_count": 41}, {"parent_genre": "Electronic & Dance Music", "genre_list": "italo dance", "track_count": 16}, {"parent_genre": "Electronic & Dance Music", "genre_list": "italo disco", "track_count": 24}, {"parent_genre": "Electronic & Dance Music", "genre_list": "jazz house", "track_count": 22}, {"parent_genre": "Electronic & Dance Music", "genre_list": "jungle", "track_count": 2}, {"parent_genre": "Electronic & Dance Music", "genre_list": "latin house", "track_count": 11}, {"parent_genre": "Electronic & Dance Music", "genre_list": "liquid funk", "track_count": 14}, {"parent_genre": "Electronic & Dance Music", "genre_list": "lo-fi house", "track_count": 64}, {"parent_genre": "Electronic & Dance Music", "genre_list": "melbourne bounce", "track_count": 12}, {"parent_genre": "Electronic & Dance Music", "genre_list": "melodic bass", "track_count": 15}, {"parent_genre": "Electronic & Dance Music", "genre_list": "melodic house", "track_count": 609}, {"parent_genre": "Electronic & Dance Music", "genre_list": "melodic techno", "track_count": 655}, {"parent_genre": "Electronic & Dance Music", "genre_list": "minimal techno", "track_count": 327}, {"parent_genre": "Electronic & Dance Music", "genre_list": "moombahton", "track_count": 8}, {"parent_genre": "Electronic & Dance Music", "genre_list": "nu disco", "track_count": 164}, {"parent_genre": "Electronic & Dance Music", "genre_list": "organic house", "track_count": 70}, {"parent_genre": "Electronic & Dance Music", "genre_list": "post-disco", "track_count": 4}, {"parent_genre": "Electronic & Dance Music", "genre_list": "progressive house", "track_count": 364}, {"parent_genre": "Electronic & Dance Music", "genre_list": "progressive trance", "track_count": 106}, {"parent_genre": "Electronic & Dance Music", "genre_list": "psytrance", "track_count": 5}, {"parent_genre": "Electronic & Dance Music", "genre_list": "rally house", "track_count": 6}, {"parent_genre": "Electronic & Dance Music", "genre_list": "riddim", "track_count": 1}, {"parent_genre": "Electronic & Dance Music", "genre_list": "slap house", "track_count": 18}, {"parent_genre": "Electronic & Dance Music", "genre_list": "speedcore", "track_count": 2}, {"parent_genre": "Electronic & Dance Music", "genre_list": "stutter house", "track_count": 51}, {"parent_genre": "Electronic & Dance Music", "genre_list": "tech house", "track_count": 130}, {"parent_genre": "Electronic & Dance Music", "genre_list": "techengue", "track_count": 3}, {"parent_genre": "Electronic & Dance Music", "genre_list": "techno", "track_count": 795}, {"parent_genre": "Electronic & Dance Music", "genre_list": "tekno", "track_count": 177}, {"parent_genre": "Electronic & Dance Music", "genre_list": "trance", "track_count": 217}, {"parent_genre": "Electronic & Dance Music", "genre_list": "tribal house", "track_count": 17}, {"parent_genre": "Electronic & Dance Music", "genre_list": "tropical house", "track_count": 42}, {"parent_genre": "Electronic & Dance Music", "genre_list": "uk funky", "track_count": 5}, {"parent_genre": "Electronic & Dance Music", "genre_list": "uk garage", "track_count": 30}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "acoustic country", "track_count": 1}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "celtic", "track_count": 1}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "country", "track_count": 1}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "folk", "track_count": 2}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "folk pop", "track_count": 5}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "folk rock", "track_count": 2}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "indie folk", "track_count": 1}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "jam band", "track_count": 1}, {"parent_genre": "Folk, Country & Acoustic Roots", "genre_list": "pop country", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "alternative hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "boom bap", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "chinese hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "christian hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "cloud rap", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "crunk", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "drift phonk", "track_count": 8}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "drill", "track_count": 2}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "east coast hip hop", "track_count": 6}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "emo rap", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "experimental hip hop", "track_count": 5}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "french rap", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "g-funk", "track_count": 2}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "german hip hop", "track_count": 4}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "grime", "track_count": 5}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "hip hop", "track_count": 7}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "jazz rap", "track_count": 3}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "lo-fi hip hop", "track_count": 6}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "old school hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "phonk", "track_count": 24}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "portuguese hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "rap", "track_count": 5}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "rap metal", "track_count": 5}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "southern hip hop", "track_count": 3}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "trip hop", "track_count": 30}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "turkish hip hop", "track_count": 1}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "uk drill", "track_count": 3}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "uk grime", "track_count": 3}, {"parent_genre": "Hip Hop, Rap & Trap", "genre_list": "west coast hip hop", "track_count": 4}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "alternative dance", "track_count": 45}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "chillwave", "track_count": 19}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "chinese indie", "track_count": 2}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "darkwave", "track_count": 14}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "downtempo", "track_count": 33}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "ebm", "track_count": 10}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "experimental", "track_count": 2}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "free jazz", "track_count": 1}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "german indie", "track_count": 16}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "hyperpop", "track_count": 11}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "idm", "track_count": 26}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "indie", "track_count": 57}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "indie dance", "track_count": 109}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "indie electronic", "track_count": 6}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "latin indie", "track_count": 3}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "madchester", "track_count": 3}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "mexican indie", "track_count": 3}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "minimalism", "track_count": 3}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "neue deutsche welle", "track_count": 27}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "new rave", "track_count": 53}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "shoegaze", "track_count": 2}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "slowcore", "track_count": 1}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "synthwave", "track_count": 24}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "vaporwave", "track_count": 4}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "visual kei", "track_count": 1}, {"parent_genre": "Indie, Alternative & Experimental", "genre_list": "witch house", "track_count": 20}, {"parent_genre": "Jazz & Blues", "genre_list": "blues", "track_count": 1}, {"parent_genre": "Jazz & Blues", "genre_list": "jazz beats", "track_count": 2}, {"parent_genre": "Jazz & Blues", "genre_list": "jazz blues", "track_count": 1}, {"parent_genre": "Jazz & Blues", "genre_list": "modern blues", "track_count": 3}, {"parent_genre": "Jazz & Blues", "genre_list": "nu jazz", "track_count": 5}, {"parent_genre": "Jazz & Blues", "genre_list": "smooth jazz", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "afrobeats", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "azonto", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "candombe", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "dancehall", "track_count": 4}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "flamenco", "track_count": 3}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "folklore argentino", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "hiplife", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "latin", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "latin alternative", "track_count": 5}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "latin folk", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "latin hip hop", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "neoperreo", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "nova mpb", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "nueva trova", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "ragga", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "reggae", "track_count": 5}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "reggaeton", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "roots reggae", "track_count": 2}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "soca", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "tango", "track_count": 1}, {"parent_genre": "Latin, Caribbean & Global Rhythms", "genre_list": "trova", "track_count": 3}, {"parent_genre": "Other", "genre_list": "big beat", "track_count": 12}, {"parent_genre": "Other", "genre_list": "chillstep", "track_count": 15}, {"parent_genre": "Other", "genre_list": "dub", "track_count": 4}, {"parent_genre": "Other", "genre_list": "electronic", "track_count": 19}, {"parent_genre": "Other", "genre_list": "industrial", "track_count": 13}, {"parent_genre": "Other", "genre_list": "lounge", "track_count": 4}, {"parent_genre": "Other", "genre_list": "neo-psychedelic", "track_count": 5}, {"parent_genre": "Other", "genre_list": "new age", "track_count": 1}, {"parent_genre": "Other", "genre_list": "new wave", "track_count": 5}, {"parent_genre": "Other", "genre_list": "southern gothic", "track_count": 2}, {"parent_genre": "Other", "genre_list": "swing music", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "acoustic pop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "anime", "track_count": 11}, {"parent_genre": "Pop & Vocal", "genre_list": "art pop", "track_count": 16}, {"parent_genre": "Pop & Vocal", "genre_list": "baroque pop", "track_count": 7}, {"parent_genre": "Pop & Vocal", "genre_list": "bedroom pop", "track_count": 4}, {"parent_genre": "Pop & Vocal", "genre_list": "britpop", "track_count": 16}, {"parent_genre": "Pop & Vocal", "genre_list": "bubblegum pop", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "chanson", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "dansk pop", "track_count": 3}, {"parent_genre": "Pop & Vocal", "genre_list": "dansktop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "dream pop", "track_count": 11}, {"parent_genre": "Pop & Vocal", "genre_list": "electropop", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "europop", "track_count": 8}, {"parent_genre": "Pop & Vocal", "genre_list": "french indie pop", "track_count": 33}, {"parent_genre": "Pop & Vocal", "genre_list": "french pop", "track_count": 8}, {"parent_genre": "Pop & Vocal", "genre_list": "german indie pop", "track_count": 11}, {"parent_genre": "Pop & Vocal", "genre_list": "german pop", "track_count": 11}, {"parent_genre": "Pop & Vocal", "genre_list": "indie pop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "j-pop", "track_count": 5}, {"parent_genre": "Pop & Vocal", "genre_list": "jangle pop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "k-ballad", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "k-pop", "track_count": 5}, {"parent_genre": "Pop & Vocal", "genre_list": "malay", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "malaysian pop", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "nederpop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "norwegian pop", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "pop", "track_count": 10}, {"parent_genre": "Pop & Vocal", "genre_list": "pop qu\u00e9b\u00e9coise", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "pop soul", "track_count": 2}, {"parent_genre": "Pop & Vocal", "genre_list": "pop urbaine", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "schlager", "track_count": 1}, {"parent_genre": "Pop & Vocal", "genre_list": "singer-songwriter", "track_count": 4}, {"parent_genre": "Pop & Vocal", "genre_list": "soft pop", "track_count": 4}, {"parent_genre": "Pop & Vocal", "genre_list": "swedish pop", "track_count": 5}, {"parent_genre": "Pop & Vocal", "genre_list": "synthpop", "track_count": 16}, {"parent_genre": "Pop & Vocal", "genre_list": "vari\u00e9t\u00e9 fran\u00e7aise", "track_count": 2}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "acid jazz", "track_count": 9}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "alternative r&b", "track_count": 9}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "classic soul", "track_count": 4}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "disco", "track_count": 10}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "french r&b", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "funk", "track_count": 10}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "gospel r&b", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "indie r&b", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "indie soul", "track_count": 17}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "jazz funk", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "motown", "track_count": 7}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "neo soul", "track_count": 7}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "northern soul", "track_count": 2}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "philly soul", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "quiet storm", "track_count": 1}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "r&b", "track_count": 5}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "retro soul", "track_count": 3}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "soul", "track_count": 5}, {"parent_genre": "R&B, Soul, Funk & Disco", "genre_list": "uk r&b", "track_count": 5}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "acid rock", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "alternative metal", "track_count": 7}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "alternative rock", "track_count": 27}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "aor", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "argentine rock", "track_count": 10}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "art rock", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "blues rock", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "classic rock", "track_count": 21}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "cold wave", "track_count": 7}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "deathrock", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "emo", "track_count": 19}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "finnish rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "folk punk", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "funk rock", "track_count": 7}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "garage rock", "track_count": 21}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "glam metal", "track_count": 3}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "glam rock", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "gothic metal", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "gothic rock", "track_count": 5}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "grunge", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "hard rock", "track_count": 6}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "hardcore", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "hardcore punk", "track_count": 8}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "indie punk", "track_count": 3}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "indie rock", "track_count": 27}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "industrial rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "j-rock", "track_count": 11}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "latin rock", "track_count": 14}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "math rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "mathcore", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "melodic hardcore", "track_count": 5}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "metal", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "metalcore", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "mexican rock", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "noise rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "nu metal", "track_count": 10}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "pop punk", "track_count": 22}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "post-grunge", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "post-hardcore", "track_count": 8}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "post-punk", "track_count": 7}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "progressive rock", "track_count": 3}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "proto-punk", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "psychedelic rock", "track_count": 11}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "punk", "track_count": 27}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "queercore", "track_count": 2}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "rap rock", "track_count": 7}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "reggae rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "riot grrrl", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "rock", "track_count": 23}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "rock and roll", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "rock en espa\u00f1ol", "track_count": 11}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "rockabilly", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "screamo", "track_count": 6}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "ska", "track_count": 4}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "ska punk", "track_count": 9}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "skate punk", "track_count": 24}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "soft rock", "track_count": 6}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "stoner rock", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "surf rock", "track_count": 3}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "symphonic metal", "track_count": 1}, {"parent_genre": "Rock, Punk & Heavy Metal", "genre_list": "yacht rock", "track_count": 3}]}}, {"mode": "vega-lite"});
-</script>
+</div>
 </div>
 </div>
 </section>
-<section id="macro-categorías-hacia-subgéneros" class="level2">
-<h2 class="anchored" data-anchor-id="macro-categorías-hacia-subgéneros">Macro-categorías hacia subgéneros</h2>
-<div id="41ad1367" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.sankey_diagram <span class="im">import</span> plot_genre_sankey</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sankey_chart <span class="op">=</span> plot_genre_sankey(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">7</span>, top_subs_n<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sankey_chart.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>                <div id="470c70b3-ee29-402c-a998-e82f126f0ec6" class="plotly-graph-div" style="height:800px; width:900px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("470c70b3-ee29-402c-a998-e82f126f0ec6")) {                    Plotly.newPlot(                        "470c70b3-ee29-402c-a998-e82f126f0ec6",                        [{"link":{"color":["rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(78,121,167,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(242,142,44,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(225,87,89,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(118,183,178,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(89,161,79,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(237,201,73,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)","rgba(175,122,161,0.5)"],"source":{"dtype":"i1","bdata":"AAAAAAEBAQECAgICAwMDAwQEBAQFBQUFBgYGBg=="},"target":{"dtype":"i1","bdata":"BwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIg=="},"value":{"dtype":"i2","bdata":"\u002fxBhAo8CGwNKAAgAGAAeABQBOQBtADUAIgAPABMADQCUABAAIQAQAD4ACgAKABEAYwEbABsAGwA="}},"node":{"color":["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#4e79a7","#4e79a7","#4e79a7","#4e79a7","#f28e2c","#f28e2c","#f28e2c","#f28e2c","#e15759","#e15759","#e15759","#e15759","#76b7b2","#76b7b2","#76b7b2","#76b7b2","#59a14f","#59a14f","#59a14f","#59a14f","#edc949","#edc949","#edc949","#edc949","#af7aa1","#af7aa1","#af7aa1","#af7aa1"],"label":["Electronic & Dance Music","Hip Hop, Rap & Trap","Indie, Alternative & Experimental","Other","Pop & Vocal","R&B, Soul, Funk & Disco","Rock, Punk & Heavy Metal","Other Electronic & Dance Music","melodic house","melodic techno","techno","Other Hip Hop, Rap & Trap","drift phonk","phonk","trip hop","Other Indie, Alternative & Experimental","indie","indie dance","new rave","Other Other","chillstep","electronic","industrial","Other Pop & Vocal","art pop","french indie pop","synthpop","Other R&B, Soul, Funk & Disco","disco","funk","indie soul","Other Rock, Punk & Heavy Metal","alternative rock","indie rock","punk"],"line":{"color":"#111111","width":0.5},"pad":30,"thickness":20},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"title":{"font":{"size":18},"text":"Genre Hierarchy Breakdown (Top 7 Families)"},"font":{"size":12,"color":"#dddddd"},"margin":{"l":20,"r":20,"t":50,"b":20},"paper_bgcolor":"#2b2b2b","plot_bgcolor":"#2b2b2b","width":900,"height":800},                        {"responsive": true}                    ).then(function(){
-                            
-var gd = document.getElementById('470c70b3-ee29-402c-a998-e82f126f0ec6');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
+<section id="metadata-de-los-tracks" class="level2">
+<h2 class="anchored" data-anchor-id="metadata-de-los-tracks">Metadata de los tracks</h2>
+<div id="22ebad3b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_track_details_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
 
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
 
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">track_name</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">explicit</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>3LBWAYCXn4GCkg0jOgWD7D</td>
+<td>Breathe In (Short Mix)</td>
+<td>247559</td>
+<td>46</td>
+<td>False</td>
+<td>melodic techno, melodic house, techno, progres...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3G8AJXzCrwPCnHiQI1ENnm</td>
+<td>Plumbum</td>
+<td>361414</td>
+<td>9</td>
+<td>False</td>
+<td>hard techno, techno, acid techno</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>4VmcBQm0YzgK0MU5geXmNA</td>
+<td>Godspeed</td>
+<td>175889</td>
+<td>10</td>
+<td>False</td>
+<td>hard house, eurodance, trance</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1rbJVNRXE8jASvaAzWw9s8</td>
+<td>Diving with Whales - Daniel Portman Radio Mix</td>
+<td>268292</td>
+<td>27</td>
+<td>False</td>
+<td>deep house, melodic house, progressive house, ...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3HER2Njuttsq8Qs8sn2G1Y</td>
+<td>On The Beat - Full Length Album Mix</td>
+<td>357720</td>
+<td>44</td>
+<td>False</td>
+<td>post-disco, disco, funk</td>
+</tr>
+</tbody>
+</table>
 
-                        })                };            </script>        </div>
+</div>
+</div>
+</div>
+</section>
+<section id="merge-de-los-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="merge-de-los-datasets">Merge de los datasets</h2>
+<ul>
+<li>Seleccionar solo las columnas clave (ID y Géneros) para hacer el cruce.</li>
+<li>Hacer un Left Join para añadir los géneros a la tabla principal con la lista completa de tracks guardadas.</li>
+</ul>
+<div id="67e3869c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>track_details_subset <span class="op">=</span> df_track_details_25[[<span class="st">'track_id'</span>, <span class="st">'artist_genres'</span>]]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>merged_list_details <span class="op">=</span> pd.merge(df_saved_tracks_25, track_details_subset, on<span class="op">=</span><span class="st">'track_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>merged_list_details.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">track_name</th>
+<th data-quarto-table-cell-role="th">artist_name</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">album_name</th>
+<th data-quarto-table-cell-role="th">album_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">added_at</th>
+<th data-quarto-table-cell-role="th">explicit</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>227091</td>
+<td>0</td>
+<td>2025-10-17T20:33:46Z</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3G8AJXzCrwPCnHiQI1ENnm</td>
+<td>Plumbum</td>
+<td>1luu</td>
+<td>6H7YXIE4ZT1Nxa2krwL6N4</td>
+<td>Europium EP</td>
+<td>0l22YC5T2pj3MvIxPMt9iT</td>
+<td>2025-02-21</td>
+<td>361414</td>
+<td>9</td>
+<td>2025-10-14T23:36:59Z</td>
+<td>False</td>
+<td>hard techno, techno, acid techno</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>4VmcBQm0YzgK0MU5geXmNA</td>
+<td>Godspeed</td>
+<td>ADB</td>
+<td>12YduHZJsgoAQlzLEDdT8T</td>
+<td>Godspeed</td>
+<td>0B3oIXhodX3Xb64ehNSAOn</td>
+<td>2025-01-31</td>
+<td>175889</td>
+<td>10</td>
+<td>2025-10-14T23:35:22Z</td>
+<td>False</td>
+<td>hard house, eurodance, trance</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>4wpX2rcuD8R6f9P78yzccy</td>
+<td>Timelapse</td>
+<td>TRYM</td>
+<td>5Nd385K2g3s0828W8Ab70z</td>
+<td>Timelapse</td>
+<td>4ZbUxkHSXVHU499uVMjawk</td>
+<td>2018-09-04</td>
+<td>370285</td>
+<td>27</td>
+<td>2025-10-11T03:51:31Z</td>
+<td>False</td>
+<td>hard techno, techno, acid techno, tekno</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>7pt0UDWnpiVJ1uEMP5iM0P</td>
+<td>No Broke Boys - Lee Foss Remix</td>
+<td>Disco Lines, Tinashe, Lee Foss</td>
+<td>5Kmr0b3ip8g9P2i0dLTC3Z</td>
+<td>No Broke Boys (Lee Foss Remix)</td>
+<td>4pWH8vGb2ZmwdAdZqMqcJO</td>
+<td>2025-10-03</td>
+<td>209333</td>
+<td>56</td>
+<td>2025-10-03T21:24:49Z</td>
+<td>True</td>
+<td>stutter house, alternative r&amp;b, tech house, house</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="transformar-fechas" class="level2">
+<h2 class="anchored" data-anchor-id="transformar-fechas">Transformar fechas</h2>
+<p>Inicialmente la columna con la fecha en la que fueron agregados los tracks es de tipo <code>string</code>, ademas la duracion esta en milisegundos. Se procede a hacer la respectiva transformacion utilizando la funcion <code>transform_time_and_duration</code>.</p>
+<div id="5f75993c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_clean_track_list <span class="op">=</span> transform_time_and_duration(merged_list_details)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_clean_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">track_name</th>
+<th data-quarto-table-cell-role="th">artist_name</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">album_name</th>
+<th data-quarto-table-cell-role="th">album_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">added_at</th>
+<th data-quarto-table-cell-role="th">explicit</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+<th data-quarto-table-cell-role="th">added_year</th>
+<th data-quarto-table-cell-role="th">added_month</th>
+<th data-quarto-table-cell-role="th">duration_mins</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>0</td>
+<td>2025-10-17 20:33:46+00:00</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>3.784850</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3G8AJXzCrwPCnHiQI1ENnm</td>
+<td>Plumbum</td>
+<td>1luu</td>
+<td>6H7YXIE4ZT1Nxa2krwL6N4</td>
+<td>Europium EP</td>
+<td>0l22YC5T2pj3MvIxPMt9iT</td>
+<td>2025-02-21</td>
+<td>9</td>
+<td>2025-10-14 23:36:59+00:00</td>
+<td>False</td>
+<td>hard techno, techno, acid techno</td>
+<td>2025</td>
+<td>10</td>
+<td>6.023567</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>4VmcBQm0YzgK0MU5geXmNA</td>
+<td>Godspeed</td>
+<td>ADB</td>
+<td>12YduHZJsgoAQlzLEDdT8T</td>
+<td>Godspeed</td>
+<td>0B3oIXhodX3Xb64ehNSAOn</td>
+<td>2025-01-31</td>
+<td>10</td>
+<td>2025-10-14 23:35:22+00:00</td>
+<td>False</td>
+<td>hard house, eurodance, trance</td>
+<td>2025</td>
+<td>10</td>
+<td>2.931483</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>4wpX2rcuD8R6f9P78yzccy</td>
+<td>Timelapse</td>
+<td>TRYM</td>
+<td>5Nd385K2g3s0828W8Ab70z</td>
+<td>Timelapse</td>
+<td>4ZbUxkHSXVHU499uVMjawk</td>
+<td>2018-09-04</td>
+<td>27</td>
+<td>2025-10-11 03:51:31+00:00</td>
+<td>False</td>
+<td>hard techno, techno, acid techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>6.171417</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>7pt0UDWnpiVJ1uEMP5iM0P</td>
+<td>No Broke Boys - Lee Foss Remix</td>
+<td>Disco Lines, Tinashe, Lee Foss</td>
+<td>5Kmr0b3ip8g9P2i0dLTC3Z</td>
+<td>No Broke Boys (Lee Foss Remix)</td>
+<td>4pWH8vGb2ZmwdAdZqMqcJO</td>
+<td>2025-10-03</td>
+<td>56</td>
+<td>2025-10-03 21:24:49+00:00</td>
+<td>True</td>
+<td>stutter house, alternative r&amp;b, tech house, house</td>
+<td>2025</td>
+<td>10</td>
+<td>3.488883</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="expandir-explode-las-listas-de-géneros" class="level2">
+<h2 class="anchored" data-anchor-id="expandir-explode-las-listas-de-géneros">Expandir (explode) las listas de géneros</h2>
+<p>Cada track almacenado tiene una lista de generos asociados, para esto es necesario asoaciar los generos con el artista, eliminar los dupplicados by valores nulos para finalmente obtener un dataset limpio.</p>
+<div id="1f6f47b1" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list <span class="op">=</span> explode_genres(df_clean_track_list)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">track_name</th>
+<th data-quarto-table-cell-role="th">artist_name</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">album_name</th>
+<th data-quarto-table-cell-role="th">album_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">added_at</th>
+<th data-quarto-table-cell-role="th">explicit</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+<th data-quarto-table-cell-role="th">added_year</th>
+<th data-quarto-table-cell-role="th">added_month</th>
+<th data-quarto-table-cell-role="th">duration_mins</th>
+<th data-quarto-table-cell-role="th">genre_list</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>0</td>
+<td>2025-10-17 20:33:46+00:00</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>3.784850</td>
+<td>techno</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>0</td>
+<td>2025-10-17 20:33:46+00:00</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>3.784850</td>
+<td>acid techno</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>0</td>
+<td>2025-10-17 20:33:46+00:00</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>3.784850</td>
+<td>hard techno</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2aAjWdZ7TsQYvyRUzAFXmB</td>
+<td>Young Forever</td>
+<td>Amelie Lens</td>
+<td>5Ho1vKl1Uz8bJlk4vbmvmf</td>
+<td>Young Forever</td>
+<td>4BOWZWwm6WVWmco0HKt80s</td>
+<td>2025-10-17</td>
+<td>0</td>
+<td>2025-10-17 20:33:46+00:00</td>
+<td>False</td>
+<td>techno, acid techno, hard techno, tekno</td>
+<td>2025</td>
+<td>10</td>
+<td>3.784850</td>
+<td>tekno</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3G8AJXzCrwPCnHiQI1ENnm</td>
+<td>Plumbum</td>
+<td>1luu</td>
+<td>6H7YXIE4ZT1Nxa2krwL6N4</td>
+<td>Europium EP</td>
+<td>0l22YC5T2pj3MvIxPMt9iT</td>
+<td>2025-02-21</td>
+<td>9</td>
+<td>2025-10-14 23:36:59+00:00</td>
+<td>False</td>
+<td>hard techno, techno, acid techno</td>
+<td>2025</td>
+<td>10</td>
+<td>6.023567</td>
+<td>hard techno</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 
