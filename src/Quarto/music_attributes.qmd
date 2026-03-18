@@ -1,0 +1,53 @@
+---
+title: "Atributos musicales"
+format: html
+jupyter: python3
+---
+
+```{python}
+#| label: setup
+#| include: false
+import sys
+import os
+import yaml
+import pandas as pd
+
+with open('_variables.yml', 'r') as file:
+    vars_config = yaml.safe_load(file)
+project_root = os.path.abspath('/Users/juanpazmino/Documents/Desarrollo/Personal_projects/SpotifyDataVis/src')
+sys.path.append(project_root)
+
+from Modules.read_data import *
+from Modules.handle_time import *
+from Modules.handle_genres import *
+from Graphics.taste_evolution import *
+from Graphics.music_attributes import *
+
+data_path_25 = vars_config['data_path_25']
+data_path_26 = vars_config['data_path_26']
+
+saved_tracks_25 = vars_config['saved_tracks_25']
+track_details_25 = vars_config['track_details_25']
+
+# Lectura de datos
+df_saved_tracks_25 = read_data(data_path_25, saved_tracks_25)
+df_track_details_25 = read_data(data_path_25, track_details_25)
+
+# Merge de los datos
+track_details_subset = df_track_details_25[['track_id', 'artist_genres']]
+merged_list_details = pd.merge(df_saved_tracks_25, track_details_subset, on='track_id', how='left')
+
+# Transformar fechas
+df_clean_track_list = transform_time_and_duration(merged_list_details)
+df_clean_track_list.head()
+
+df_exploded_track_list = explode_genres(df_clean_track_list)
+```
+
+## Duracion Vs Popularidad
+Claramente se puede observar como la duracion de las los tracks afecta su nivel de popularidad.
+```{python}
+from Graphics.music_attributes import plot_duration_vs_popularity
+chart_q3 = plot_duration_vs_popularity(df_exploded_track_list)
+chart_q3.display()
+```

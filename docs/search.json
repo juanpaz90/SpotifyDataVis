@@ -215,5 +215,19 @@
     "title": "Sesgo de popularidad",
     "section": "Composición de generos por nivel de popularidad",
     "text": "Composición de generos por nivel de popularidad\nEste grafico pemite observar la cantidad de canciones por genero musical y su popularidad dentro de mi biblioteca musical.\n\nfrom Graphics.popularity_bias import plot_genre_popularity_breakdown\nchart_q2_genres = plot_genre_popularity_breakdown(df_exploded_track_list)\nchart_q2_genres.display()"
+  },
+  {
+    "objectID": "music_attributes.html",
+    "href": "music_attributes.html",
+    "title": "Atributos musicales",
+    "section": "",
+    "text": "Claramente se puede observar como la duracion de las los tracks afecta su nivel de popularidad.\n\nfrom Graphics.music_attributes import plot_duration_vs_popularity\nchart_q3 = plot_duration_vs_popularity(df_exploded_track_list)\nchart_q3.display()"
+  },
+  {
+    "objectID": "music_attributes.html#duracion-vs-popularidad",
+    "href": "music_attributes.html#duracion-vs-popularidad",
+    "title": "Atributos musicales",
+    "section": "",
+    "text": "Claramente se puede observar como la duracion de las los tracks afecta su nivel de popularidad.\n\nfrom Graphics.music_attributes import plot_duration_vs_popularity\nchart_q3 = plot_duration_vs_popularity(df_exploded_track_list)\nchart_q3.display()"
   }
 ]
