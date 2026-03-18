@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="numero-de-canciones-añadidas" class="level2">
 <h2 class="anchored" data-anchor-id="numero-de-canciones-añadidas">Numero de canciones añadidas</h2>
 <p>A continuación se muestra el numero de tracks categorizados por genero que se han añadido durante los años.</p>
-<div id="29bbb02e" class="cell" data-execution_count="2">
+<div id="cf458703" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.taste_evolution <span class="im">import</span> plot_taste_evolution</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>chart_q1 <span class="op">=</span> plot_taste_evolution(df_exploded_track_list, top_parents_n<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chart_q1.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -194,23 +194,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-d87758f25484410daa676f4fd5b9f891.vega-embed {
+  #altair-viz-0d38a2967c614499993b5cb510e2c499.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d87758f25484410daa676f4fd5b9f891.vega-embed details,
-  #altair-viz-d87758f25484410daa676f4fd5b9f891.vega-embed details summary {
+  #altair-viz-0d38a2967c614499993b5cb510e2c499.vega-embed details,
+  #altair-viz-0d38a2967c614499993b5cb510e2c499.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d87758f25484410daa676f4fd5b9f891"></div>
+<div id="altair-viz-0d38a2967c614499993b5cb510e2c499"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d87758f25484410daa676f4fd5b9f891") {
-      outputDiv = document.getElementById("altair-viz-d87758f25484410daa676f4fd5b9f891");
+    if (outputDiv.id !== "altair-viz-0d38a2967c614499993b5cb510e2c499") {
+      outputDiv = document.getElementById("altair-viz-0d38a2967c614499993b5cb510e2c499");
     }
 
     const paths = {
@@ -266,30 +266,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dispersión-y-continuidad-de-artistas-top" class="level2">
 <h2 class="anchored" data-anchor-id="dispersión-y-continuidad-de-artistas-top">Dispersión y Continuidad de Artistas Top</h2>
 <p>Permite ver en qué años específicos se añadieron más tracks de un artista.</p>
-<div id="ca60f51b" class="cell" data-execution_count="3">
+<div id="1e10179c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_scatter <span class="im">import</span> plot_artist_scatter</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>artist_chart <span class="op">=</span> plot_artist_scatter(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>artist_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-8528218a280a47bb969db855d93b0542.vega-embed {
+  #altair-viz-4e96083783dd489fb71644df800ca654.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8528218a280a47bb969db855d93b0542.vega-embed details,
-  #altair-viz-8528218a280a47bb969db855d93b0542.vega-embed details summary {
+  #altair-viz-4e96083783dd489fb71644df800ca654.vega-embed details,
+  #altair-viz-4e96083783dd489fb71644df800ca654.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8528218a280a47bb969db855d93b0542"></div>
+<div id="altair-viz-4e96083783dd489fb71644df800ca654"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8528218a280a47bb969db855d93b0542") {
-      outputDiv = document.getElementById("altair-viz-8528218a280a47bb969db855d93b0542");
+    if (outputDiv.id !== "altair-viz-4e96083783dd489fb71644df800ca654") {
+      outputDiv = document.getElementById("altair-viz-4e96083783dd489fb71644df800ca654");
     }
 
     const paths = {
@@ -345,30 +345,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="flujo-de-los-artistas-mas-escuchados" class="level2">
 <h2 class="anchored" data-anchor-id="flujo-de-los-artistas-mas-escuchados">Flujo de los artistas mas escuchados</h2>
 <p>Muestra el flujo orgánico y temporal de los artistas más escuchados.</p>
-<div id="d972efa3" class="cell" data-execution_count="4">
+<div id="e61f22f0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.artists_streamgraph <span class="im">import</span> plot_artist_streamgraph</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>artist_stream <span class="op">=</span> plot_artist_streamgraph(df_clean_track_list, top_n<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>artist_stream.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-6ae0c332132b44fa938279405dc1d384.vega-embed {
+  #altair-viz-e14ce7b508f9481ba275388e1b202141.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6ae0c332132b44fa938279405dc1d384.vega-embed details,
-  #altair-viz-6ae0c332132b44fa938279405dc1d384.vega-embed details summary {
+  #altair-viz-e14ce7b508f9481ba275388e1b202141.vega-embed details,
+  #altair-viz-e14ce7b508f9481ba275388e1b202141.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6ae0c332132b44fa938279405dc1d384"></div>
+<div id="altair-viz-e14ce7b508f9481ba275388e1b202141"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6ae0c332132b44fa938279405dc1d384") {
-      outputDiv = document.getElementById("altair-viz-6ae0c332132b44fa938279405dc1d384");
+    if (outputDiv.id !== "altair-viz-e14ce7b508f9481ba275388e1b202141") {
+      outputDiv = document.getElementById("altair-viz-e14ce7b508f9481ba275388e1b202141");
     }
 
     const paths = {
@@ -424,30 +424,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="distribución-por-artista-y-género" class="level2">
 <h2 class="anchored" data-anchor-id="distribución-por-artista-y-género">Distribución por Artista y Género</h2>
 <p>Muestra los artistas con mas tracks guardados en mi biblioteca, junto a su genereo y subgenero.</p>
-<div id="85568930" class="cell" data-execution_count="5">
+<div id="737b822f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.genre_category <span class="im">import</span> plot_artist_radial</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>radial_chart <span class="op">=</span> plot_artist_radial(df_exploded_track_list, top_n<span class="op">=</span><span class="dv">35</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>radial_chart.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-774720aacdd54940a330457165f2bca5.vega-embed {
+  #altair-viz-6675421bc44a48d38c9ef876a94df592.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-774720aacdd54940a330457165f2bca5.vega-embed details,
-  #altair-viz-774720aacdd54940a330457165f2bca5.vega-embed details summary {
+  #altair-viz-6675421bc44a48d38c9ef876a94df592.vega-embed details,
+  #altair-viz-6675421bc44a48d38c9ef876a94df592.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-774720aacdd54940a330457165f2bca5"></div>
+<div id="altair-viz-6675421bc44a48d38c9ef876a94df592"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-774720aacdd54940a330457165f2bca5") {
-      outputDiv = document.getElementById("altair-viz-774720aacdd54940a330457165f2bca5");
+    if (outputDiv.id !== "altair-viz-6675421bc44a48d38c9ef876a94df592") {
+      outputDiv = document.getElementById("altair-viz-6675421bc44a48d38c9ef876a94df592");
     }
 
     const paths = {

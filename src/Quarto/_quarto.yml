@@ -14,5 +14,6 @@ website:
 
 format:
   html:
+    page-layout: full
     theme: darkly
     toc: true
