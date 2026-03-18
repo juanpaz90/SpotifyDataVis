@@ -23,52 +23,29 @@ from Modules.read_data import *
 from Modules.handle_time import *
 from Modules.handle_genres import *
 from Graphics.taste_evolution import *
+from Graphics.popularity_bias import *
 
 data_path_25 = vars_config['data_path_25']
 data_path_26 = vars_config['data_path_26']
 
 saved_tracks_25 = vars_config['saved_tracks_25']
 track_details_25 = vars_config['track_details_25']
-```
 
-# Lectura y Procesamiento
-Aplicamos transformaciones iniciales, hacemos el cruce (merge) entre los tracks guardados y sus metadatos, y normalizamos los géneros musicales.
-```{python}
+# Lectura de datos
 df_saved_tracks_25 = read_data(data_path_25, saved_tracks_25)
 df_track_details_25 = read_data(data_path_25, track_details_25)
-```
 
-## Lista completa de traks alamcenados
-```{python}
-df_saved_tracks_25.head()
-```
-
-## Metadata de los tracks
-```{python}
-df_track_details_25.head()
-```
-
-## Merge de los datasets
-- Seleccionar solo las columnas clave (ID y Géneros) de los detalles para hacer el cruce
-- Hacer un Left Join para añadir los géneros a la tabla principal de canciones guardadas
-```{python}
+# Merge de los datos
 track_details_subset = df_track_details_25[['track_id', 'artist_genres']]
 merged_list_details = pd.merge(df_saved_tracks_25, track_details_subset, on='track_id', how='left')
 
-merged_list_details.head()
-```
-
-## Transformar fechas
-```{python}
+# Transformar fechas
 df_clean_track_list = transform_time_and_duration(merged_list_details)
 df_clean_track_list.head()
+
+df_exploded_track_list = explode_genres(df_clean_track_list)
 ```
 
-## Expandir (explode) las listas de géneros
-```{python}
-df_exploded_track_list = explode_genres(df_clean_track_list)
-df_exploded_track_list.head()
-```
 
 # Generos Musicales en mi biblioteca
 Se empieza con un analisis de los principales generos que componenen mi biblioteca musical, esto nos da una idea general de mis preferencias musicales.

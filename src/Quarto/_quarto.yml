@@ -8,13 +8,15 @@ website:
     background: "#1DB954"
     left:
       - href: index.qmd
-        text: "Inicio"
+        text: "Generos"
       - href: music_evolution.qmd
         text: "Evolución Musical"
       - href: popularity_bias.qmd
         text: "Sesgo de popularidad"
       - href: music_attributes.qmd
         text: "Atributos musicales"
+      - href: procesamiento.qmd
+        text: "Procesamiento"
 
 format:
   html:

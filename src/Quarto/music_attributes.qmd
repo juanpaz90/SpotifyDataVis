@@ -51,3 +51,10 @@ from Graphics.music_attributes import plot_duration_vs_popularity
 chart_q3 = plot_duration_vs_popularity(df_exploded_track_list)
 chart_q3.display()
 ```
+
+## Genero Vs Duracion 
+```{python}
+from Graphics.music_attributes import plot_genre_duration_vs_popularity
+chart_q3_gp = plot_genre_duration_vs_popularity(df_exploded_track_list)
+chart_q3_gp.display()
+``` 
