@@ -139,6 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./popularity_bias.html" aria-current="page"> 
 <span class="menu-text">Sesgo de popularidad</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./music_attributes.html"> 
+<span class="menu-text">Atributos musicales</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -186,30 +190,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sesgo-de-popularidad-anual" class="level2">
 <h2 class="anchored" data-anchor-id="sesgo-de-popularidad-anual">Sesgo de popularidad anual</h2>
 <p>Se identifica en cada año el tipo de genero que mas se han guarado en la biblioteca.</p>
-<div id="96c1798f" class="cell" data-execution_count="2">
+<div id="5c77b02e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_popularity_bias</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>chart_q2 <span class="op">=</span> plot_popularity_bias(df_clean_track_list)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chart_q2.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed {
+  #altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed details,
-  #altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df.vega-embed details summary {
+  #altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a.vega-embed details,
+  #altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df"></div>
+<div id="altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df") {
-      outputDiv = document.getElementById("altair-viz-0a1a5c9e5eb0482da224bf7dcd7e00df");
+    if (outputDiv.id !== "altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a") {
+      outputDiv = document.getElementById("altair-viz-83d5bca9bc8e4848b5a84f5f4832e39a");
     }
 
     const paths = {
@@ -265,30 +269,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sesgo-de-popularidad-de-toda-la-biblioteca-musical" class="level2">
 <h2 class="anchored" data-anchor-id="sesgo-de-popularidad-de-toda-la-biblioteca-musical">Sesgo de popularidad de toda la biblioteca musical</h2>
 <p>Facilmente se puede indentificar si la biblioteca se inclina mas a generos de nicho o mainstream.</p>
-<div id="42e7d2bc" class="cell" data-execution_count="3">
+<div id="20828fdd" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_overall_popularity_donut</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>chart_q2_overall <span class="op">=</span> plot_overall_popularity_donut(df_clean_track_list)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chart_q2_overall.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed {
+  #altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed details,
-  #altair-viz-b67462104c2040d9901545a15518bbf9.vega-embed details summary {
+  #altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c.vega-embed details,
+  #altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-b67462104c2040d9901545a15518bbf9"></div>
+<div id="altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b67462104c2040d9901545a15518bbf9") {
-      outputDiv = document.getElementById("altair-viz-b67462104c2040d9901545a15518bbf9");
+    if (outputDiv.id !== "altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c") {
+      outputDiv = document.getElementById("altair-viz-9ddf474c64aa4e0d8285a9eb1dac917c");
     }
 
     const paths = {
@@ -344,30 +348,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="composición-de-generos-por-nivel-de-popularidad" class="level2">
 <h2 class="anchored" data-anchor-id="composición-de-generos-por-nivel-de-popularidad">Composición de generos por nivel de popularidad</h2>
 <p>Este grafico pemite observar la cantidad de canciones por genero musical y su popularidad dentro de mi biblioteca musical.</p>
-<div id="033dcf43" class="cell" data-execution_count="4">
+<div id="7b6dd3e2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Graphics.popularity_bias <span class="im">import</span> plot_genre_popularity_breakdown</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>chart_q2_genres <span class="op">=</span> plot_genre_popularity_breakdown(df_exploded_track_list)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>chart_q2_genres.display()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
 <style>
-  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed {
+  #altair-viz-e4741381be2f48729b614e01d4f20289.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed details,
-  #altair-viz-0cc6e2049135442bb55c72dc1c1bcdac.vega-embed details summary {
+  #altair-viz-e4741381be2f48729b614e01d4f20289.vega-embed details,
+  #altair-viz-e4741381be2f48729b614e01d4f20289.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-0cc6e2049135442bb55c72dc1c1bcdac"></div>
+<div id="altair-viz-e4741381be2f48729b614e01d4f20289"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0cc6e2049135442bb55c72dc1c1bcdac") {
-      outputDiv = document.getElementById("altair-viz-0cc6e2049135442bb55c72dc1c1bcdac");
+    if (outputDiv.id !== "altair-viz-e4741381be2f48729b614e01d4f20289") {
+      outputDiv = document.getElementById("altair-viz-e4741381be2f48729b614e01d4f20289");
     }
 
     const paths = {

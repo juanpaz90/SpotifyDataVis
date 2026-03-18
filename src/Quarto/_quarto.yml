@@ -14,7 +14,7 @@ website:
       - href: popularity_bias.qmd
         text: "Sesgo de popularidad"
       - href: music_attributes.qmd
-        text: "Atributos Musicales"
+        text: "Atributos musicales"
 
 format:
   html:
