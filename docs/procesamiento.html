@@ -128,6 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link active" href="./procesamiento.html" aria-current="page"> 
+<span class="menu-text">Procesamiento</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Generos</span></a>
   </li>  
@@ -142,10 +146,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./music_attributes.html"> 
 <span class="menu-text">Atributos musicales</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./procesamiento.html" aria-current="page"> 
-<span class="menu-text">Procesamiento</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -163,7 +163,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lectura-y-procesamiento" id="toc-lectura-y-procesamiento" class="nav-link active" data-scroll-target="#lectura-y-procesamiento">Lectura y Procesamiento</a>
+  <li><a href="#problema" id="toc-problema" class="nav-link active" data-scroll-target="#problema">Problema</a></li>
+  <li><a href="#contexto" id="toc-contexto" class="nav-link" data-scroll-target="#contexto">Contexto</a></li>
+  <li><a href="#dataset-seleccionado" id="toc-dataset-seleccionado" class="nav-link" data-scroll-target="#dataset-seleccionado">Dataset seleccionado</a></li>
+  <li><a href="#lectura-y-procesamiento" id="toc-lectura-y-procesamiento" class="nav-link" data-scroll-target="#lectura-y-procesamiento">Lectura y Procesamiento</a>
   <ul class="collapse">
   <li><a href="#lista-completa-de-traks-alamcenados" id="toc-lista-completa-de-traks-alamcenados" class="nav-link" data-scroll-target="#lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</a></li>
   <li><a href="#metadata-de-los-tracks" id="toc-metadata-de-los-tracks" class="nav-link" data-scroll-target="#metadata-de-los-tracks">Metadata de los tracks</a></li>
@@ -196,19 +199,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Se añade como extra la metodologia que se utilizo al leer y procesar los datos. Ademas se incluye una visualizacion de los datasets que se usaron.</p>
+<section id="problema" class="level1">
+<h1>Problema</h1>
+<p>Este proyecto se enmarca en el análisis de datos aplicado al comportamiento personal, específicamente en el dominio del consumo musical. A partir de datos obtenidos del API de Spotify, se busca analizar cómo han evolucionado mis hábitos de escucha a lo largo del tiempo, considerando aspectos como géneros, artistas, popularidad y atributos musicales.</p>
+</section>
+<section id="contexto" class="level1">
+<h1>Contexto</h1>
+<p>La motivación principal radica en entender de forma objetiva una experiencia que normalmente es subjetiva: mi relación con la música. Dado que la música ha sido una constante en mi vida, este análisis permite transformar patrones de escucha en información cuantificable, facilitando el autoconocimiento mediante datos.</p>
+<p>A través de técnicas de visualización, el proyecto busca responder tres preguntas clave:<br>
+- <em>¿Cómo ha evolucionado mi gusto musical con el tiempo?</em>.<br>
+- <em>¿Existe un sesgo hacia música mainstream o de nicho?</em>.<br>
+- <em>¿Cómo influyen variables como la duración, popularidad y género en mi biblioteca musical?</em></p>
+</section>
+<section id="dataset-seleccionado" class="level1">
+<h1>Dataset seleccionado</h1>
+<p>El dataset utilizado proviene del API de Spotify y está compuesto por información personal de canciones guardadas (<code>saved tracks</code>) y sus respectivos detalles (<code>track details</code>), recolectados durante todo el tiempo de vida de la cuenta de Spotify. El conjunto de datos contiene múltiples observaciones correspondientes a canciones almacenadas en la biblioteca personal, junto con sus metadatos asociados. Entre las variables principales se incluyen: identificador de la canción (<code>track_id</code>), fecha de agregado, duración, popularidad, y géneros musicales asociados a los artistas.</p>
+<p>En cuanto al tipo de variables, el dataset incluye: • Variables categóricas: géneros musicales, artistas • Variables numéricas: duración de la canción, popularidad • Variables temporales: fecha de agregado • Variables estructuradas: listas de géneros en cada cancion</p>
+<p>El dataset requiere procesamiento previo, incluyendo limpieza, transformación de fechas y duración, y normalización de géneros para permitir su análisis y visualización.</p>
+</section>
 <section id="lectura-y-procesamiento" class="level1">
 <h1>Lectura y Procesamiento</h1>
-<p>Aplicamos transformaciones iniciales, hacemos el cruce (merge) entre los tracks guardados y sus metadatos, y normalizamos los géneros musicales.</p>
-<div id="49233642" class="cell" data-execution_count="2">
+<div id="5fdfaf6b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25 <span class="op">=</span> read_data(data_path_25, saved_tracks_25)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_track_details_25 <span class="op">=</span> read_data(data_path_25, track_details_25)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="lista-completa-de-traks-alamcenados" class="level2">
 <h2 class="anchored" data-anchor-id="lista-completa-de-traks-alamcenados">Lista completa de traks alamcenados</h2>
-<div id="7514bbb9" class="cell" data-execution_count="3">
+<div id="ac72a445" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_saved_tracks_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -309,9 +328,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="metadata-de-los-tracks" class="level2">
 <h2 class="anchored" data-anchor-id="metadata-de-los-tracks">Metadata de los tracks</h2>
-<div id="e3ca179a" class="cell" data-execution_count="4">
+<div id="5825ca41" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_track_details_25.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -383,15 +402,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="merge-de-los-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="merge-de-los-datasets">Merge de los datasets</h2>
 <ul>
-<li>Seleccionar solo las columnas clave (ID y Géneros) de los detalles para hacer el cruce</li>
-<li>Hacer un Left Join para añadir los géneros a la tabla principal de canciones guardadas</li>
+<li>Seleccionar solo las columnas clave (ID y Géneros) para hacer el cruce.</li>
+<li>Hacer un Left Join para añadir los géneros a la tabla principal con la lista completa de tracks guardadas.</li>
 </ul>
-<div id="1d9abc39" class="cell" data-execution_count="5">
+<div id="19e774e1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>track_details_subset <span class="op">=</span> df_track_details_25[[<span class="st">'track_id'</span>, <span class="st">'artist_genres'</span>]]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>merged_list_details <span class="op">=</span> pd.merge(df_saved_tracks_25, track_details_subset, on<span class="op">=</span><span class="st">'track_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>merged_list_details.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -498,10 +517,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="transformar-fechas" class="level2">
 <h2 class="anchored" data-anchor-id="transformar-fechas">Transformar fechas</h2>
-<div id="debe7f60" class="cell" data-execution_count="6">
+<p>Inicialmente la columna con la fecha en la que fueron agregados los tracks es de tipo <code>string</code>, ademas la duracion esta en milisegundos. Se procede a hacer la respectiva transformacion utilizando la funcion <code>transform_time_and_duration</code>.</p>
+<div id="752927f9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_clean_track_list <span class="op">=</span> transform_time_and_duration(merged_list_details)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_clean_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -620,10 +640,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="expandir-explode-las-listas-de-géneros" class="level2">
 <h2 class="anchored" data-anchor-id="expandir-explode-las-listas-de-géneros">Expandir (explode) las listas de géneros</h2>
-<div id="3ccffc49" class="cell" data-execution_count="7">
+<p>Cada track almacenado tiene una lista de generos asociados, para esto es necesario asoaciar los generos con el artista, eliminar los dupplicados by valores nulos para finalmente obtener un dataset limpio.</p>
+<div id="805a1d82" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list <span class="op">=</span> explode_genres(df_clean_track_list)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_exploded_track_list.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 

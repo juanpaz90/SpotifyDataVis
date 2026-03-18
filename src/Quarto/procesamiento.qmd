@@ -3,8 +3,6 @@ title: "Procesamiento de datos"
 format: html
 jupyter: python3
 ---
-
-Se añade como extra la metodologia que se utilizo al leer y procesar los datos. Ademas se incluye una visualizacion de los datasets que se usaron.
  
 ```{python}
 #| label: setup
@@ -31,8 +29,30 @@ saved_tracks_25 = vars_config['saved_tracks_25']
 track_details_25 = vars_config['track_details_25']
 ```
 
+# Problema
+Este proyecto se enmarca en el análisis de datos aplicado al comportamiento personal, específicamente en el dominio del consumo musical. A partir de datos obtenidos del API de Spotify, se busca analizar cómo han evolucionado mis hábitos de escucha a lo largo del tiempo, considerando aspectos como géneros, artistas, popularidad y atributos musicales.
+
+# Contexto 
+La motivación principal radica en entender de forma objetiva una experiencia que normalmente es subjetiva: mi relación con la música. Dado que la música ha sido una constante en mi vida, este análisis permite transformar patrones de escucha en información cuantificable, facilitando el autoconocimiento mediante datos.
+
+A través de técnicas de visualización, el proyecto busca responder tres preguntas clave: \
+- *¿Cómo ha evolucionado mi gusto musical con el tiempo?*. \
+- *¿Existe un sesgo hacia música mainstream o de nicho?*. \
+- *¿Cómo influyen variables como la duración, popularidad y género en mi biblioteca musical?*
+
+# Dataset seleccionado
+El dataset utilizado proviene del API de Spotify y está compuesto por información personal de canciones guardadas (`saved tracks`) y sus respectivos detalles (`track details`), recolectados durante todo el tiempo de vida de la cuenta de Spotify.
+El conjunto de datos contiene múltiples observaciones correspondientes a canciones almacenadas en la biblioteca personal, junto con sus metadatos asociados. Entre las variables principales se incluyen: identificador de la canción (`track_id`), fecha de agregado, duración, popularidad, y géneros musicales asociados a los artistas.
+
+En cuanto al tipo de variables, el dataset incluye:
+	•	Variables categóricas: géneros musicales, artistas
+	•	Variables numéricas: duración de la canción, popularidad
+	•	Variables temporales: fecha de agregado
+	•	Variables estructuradas: listas de géneros en cada cancion
+
+El dataset requiere procesamiento previo, incluyendo limpieza, transformación de fechas y duración, y normalización de géneros para permitir su análisis y visualización.
+
 # Lectura y Procesamiento
-Aplicamos transformaciones iniciales, hacemos el cruce (merge) entre los tracks guardados y sus metadatos, y normalizamos los géneros musicales.
 ```{python}
 df_saved_tracks_25 = read_data(data_path_25, saved_tracks_25)
 df_track_details_25 = read_data(data_path_25, track_details_25)
@@ -49,8 +69,8 @@ df_track_details_25.head()
 ```
 
 ## Merge de los datasets
-- Seleccionar solo las columnas clave (ID y Géneros) de los detalles para hacer el cruce
-- Hacer un Left Join para añadir los géneros a la tabla principal de canciones guardadas
+- Seleccionar solo las columnas clave (ID y Géneros) para hacer el cruce.
+- Hacer un Left Join para añadir los géneros a la tabla principal con la lista completa de tracks guardadas.
 ```{python}
 track_details_subset = df_track_details_25[['track_id', 'artist_genres']]
 merged_list_details = pd.merge(df_saved_tracks_25, track_details_subset, on='track_id', how='left')
@@ -59,13 +79,17 @@ merged_list_details.head()
 ```
 
 ## Transformar fechas
+Inicialmente la columna con la fecha en la que fueron agregados los tracks es de tipo `string`, ademas la duracion esta en milisegundos. 
+Se procede a hacer la respectiva transformacion utilizando la funcion `transform_time_and_duration`. 
 ```{python}
 df_clean_track_list = transform_time_and_duration(merged_list_details)
 df_clean_track_list.head()
 ```
 
 ## Expandir (explode) las listas de géneros
+Cada track almacenado tiene una lista de generos asociados, para esto es necesario asoaciar los generos con el artista, eliminar los dupplicados by valores nulos para finalmente obtener un dataset limpio. 
 ```{python}
 df_exploded_track_list = explode_genres(df_clean_track_list)
 df_exploded_track_list.head()
 ```
+

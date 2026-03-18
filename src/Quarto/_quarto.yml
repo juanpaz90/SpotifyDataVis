@@ -7,6 +7,8 @@ website:
   navbar:
     background: "#1DB954"
     left:
+      - href: procesamiento.qmd
+        text: "Procesamiento"
       - href: index.qmd
         text: "Generos"
       - href: music_evolution.qmd
@@ -15,8 +17,7 @@ website:
         text: "Sesgo de popularidad"
       - href: music_attributes.qmd
         text: "Atributos musicales"
-      - href: procesamiento.qmd
-        text: "Procesamiento"
+      
 
 format:
   html:
